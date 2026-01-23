@@ -1,11 +1,19 @@
 # Medium Articles
 
-HTML versions of articles for importing to Medium via GitHub Pages.
+Published articles for Medium import via GitHub Pages.
 
-## Articles
+## Published Articles
 
-- [User Segmentation](user-segmentation.html) - The Hidden Problem in Your Product: When Every User Gets the Same Interface
+1. **User Segmentation** - `user-segmentation.html`
+   - Published: January 22, 2026
+   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/user-segmentation.html
 
-## Usage
+2. **Experimentation Velocity** - `experimentation-velocity.html`
+   - Published: January 23, 2026
+   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/experimentation-velocity.html
 
-These files are hosted via GitHub Pages and imported to Medium using Medium's import tool at https://medium.com/p/import
+## How to Import to Medium
+
+1. Navigate to https://medium.com/p/import
+2. Enter the GitHub Pages URL for the article
+3. Review imported article and publish
