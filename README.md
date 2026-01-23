@@ -12,6 +12,10 @@ Published articles for Medium import via GitHub Pages.
    - Published: January 23, 2026
    - Medium Import URL: https://jakemcmahon.github.io/medium-articles/experimentation-velocity.html
 
+3. **AI Roadmap SCARE Framework** - `ai-roadmap-scare-framework.html`
+   - Published: January 23, 2026
+   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/ai-roadmap-scare-framework.html
+
 ## How to Import to Medium
 
 1. Navigate to https://medium.com/p/import
