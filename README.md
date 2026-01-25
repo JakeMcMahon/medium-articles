@@ -20,6 +20,8 @@ Published articles for Medium import via GitHub Pages.
 
 1. **The First Dashboard That Actually Drives Decisions** - `first-dashboard-that-drives-decisions.html`
    - Medium Import URL: https://jakemcmahon.github.io/medium-articles/first-dashboard-that-drives-decisions.html
+2. **Make No Mistakes: The AI Misconceptions That Sink Projects** - `make-no-mistakes-ai-misconceptions.html`
+   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/make-no-mistakes-ai-misconceptions.html
 
 ## How to Import to Medium
 
