@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>medium-podcast-24-posthog-migration</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1
+id="how-posthog-competes-with-amplitude-and-mixpanel-and-why-open-source-matters-for-analytics">How
+PostHog Competes With Amplitude and Mixpanel (And Why Open-Source
+Matters for Analytics)</h1>
+<p>When I first looked at PostHog’s <a
+href="https://github.com/PostHog/posthog">30,983 GitHub stars</a>, I
+thought it was just another analytics tool trying to undercut the big
+players on price.</p>
+<p>I was wrong.</p>
+<p>The real story isn’t about features or costs—it’s about <strong>what
+you can prove, what you can control, and what happens when your
+analytics vendor becomes your compliance problem</strong>.</p>
+<hr />
+<h2 id="tldr">TL;DR</h2>
+<p>If you only read one section, read this:</p>
+<p><strong>Open-source changes the power dynamic.</strong> You can read
+the code that processes your data instead of trusting a black box. This
+matters for compliance, but also for avoiding vendor lock-in when you
+need custom analysis (<a
+href="https://github.com/PostHog/posthog">GitHub repo</a>).</p>
+<p><strong>Pricing models determine what you can afford to
+measure.</strong> PostHog and Mixpanel charge per event; Amplitude
+charges per user. Pick the wrong model and your bill explodes as you
+scale (<a href="https://posthog.com/pricing">PostHog pricing</a>, <a
+href="https://mixpanel.com/pricing/">Mixpanel pricing</a>, <a
+href="https://amplitude.com/pricing">Amplitude pricing</a>).</p>
+<p><strong>SQL access means faster answers.</strong> PostHog lets you
+write SQL queries that join product events with customer data—no export
+pipelines required (<a href="https://posthog.com/docs/sql">SQL docs</a>,
+<a href="https://posthog.com/data-warehouse">Data warehouse</a>).</p>
+<p><strong>HIPAA compliance requires paperwork.</strong> PostHog
+provides Business Associate Agreements for Cloud customers with paid
+add-ons (<a
+href="https://posthog.com/docs/privacy/hipaa-compliance">HIPAA
+compliance</a>, <a href="https://posthog.com/baa">BAA
+generator</a>).</p>
+<hr />
+<h2 id="why-trust-us-isnt-good-enough-anymore">Why “Trust Us” Isn’t Good
+Enough Anymore</h2>
+<p>Here’s what happens with traditional analytics platforms:</p>
+<p>Your engineering team ships event data to Mixpanel or Amplitude.
+Somewhere in the cloud, that data gets processed, transformed, and
+stored. <strong>You have no idea what’s actually happening to
+it.</strong></p>
+<p>For most companies, this is fine. You trust the vendor. They have big
+customers, security certifications, and nice marketing pages.</p>
+<p>But what if you’re building healthcare software? Or handling
+financial data? Or just want to avoid getting locked into expensive
+contracts as you scale?</p>
+<p><strong>Open-source flips this relationship.</strong> Instead of
+“trust us,” it’s “verify it yourself.” You can read the code, run it on
+your own servers, and prove—not just claim—that your setup meets your
+requirements.</p>
+<p>This isn’t theoretical. Healthcare companies use PostHog specifically
+because they can audit the code to prove HIPAA compliance. Try doing
+that with a closed-source platform.</p>
+<hr />
+<h2 id="the-four-differences-that-actually-matter">The Four Differences
+That Actually Matter</h2>
+<p>Once you get past basic charts and dashboards, here’s where PostHog,
+Amplitude, and Mixpanel diverge in ways that affect your day-to-day
+work:</p>
+<h3 id="what-you-pay-for-and-how-fast-your-bill-grows">1) What you pay
+for (and how fast your bill grows)</h3>
+<p>The pricing model isn’t just about cost—<strong>it determines what
+you can afford to measure</strong>.</p>
+<p><strong>PostHog:</strong> Charges <strong>$0.00005 per event</strong>
+after the <strong>first 1 million events free</strong> each month. Also
+includes <strong>5,000 session replays free</strong> and <strong>1
+million feature flag requests free</strong> (<a
+href="https://posthog.com/pricing">PostHog pricing</a>).</p>
+<p><strong>Mixpanel:</strong> Offers <strong>1 million monthly events
+free</strong>, then <strong>$0.28 per 1,000 events</strong> after that.
+Growth plans include <strong>20,000 monthly session replays
+free</strong>. The free tier limits you to <strong>5 saved
+reports</strong> and <strong>10,000 monthly session replays</strong> (<a
+href="https://mixpanel.com/pricing/">Mixpanel pricing</a>).</p>
+<p><strong>Amplitude:</strong> Uses a completely different
+model—<strong>Monthly Tracked Users (MTUs)</strong>. Their Plus plan
+<strong>starts at $49/month</strong> and includes <strong>50,000 MTUs
+(up to 10 million events)</strong> (<a
+href="https://amplitude.com/pricing">Amplitude pricing</a>).</p>
+<p><strong>Why this matters:</strong> If your product generates lots of
+events per user (think: real-time collaboration tools, live dashboards,
+streaming apps), event-based pricing can get expensive fast. But if you
+have lots of light users who barely touch your product, MTU-based
+pricing can also rack up costs.</p>
+<p>There’s no universal “better” model. The right choice depends on your
+actual usage patterns.</p>
+<p>One subtle difference: Mixpanel charges the same for anonymous and
+identified events. PostHog differentiates between them, which can matter
+for products with lots of pre-signup activity (<a
+href="https://posthog.com/blog/posthog-vs-mixpanel">PostHog vs
+Mixpanel</a>).</p>
+<h3
+id="sql-access-or-how-to-answer-questions-without-waiting-for-engineers">2)
+SQL access (or: how to answer questions without waiting for
+engineers)</h3>
+<p>This is where PostHog gets interesting.</p>
+<p>Most analytics platforms give you predefined reports and dashboards.
+If you want to answer a custom question—say, “Which customers who
+upgraded last quarter are most likely to churn based on feature
+usage?”—you’re either: - Clicking through complex UI wizards - Exporting
+CSVs and joining them in Excel - Asking your data team to build a
+pipeline</p>
+<p><strong>PostHog gives you SQL.</strong> Specifically, HogQL—a SQL
+variant that works on your event data (<a
+href="https://posthog.com/docs/hogql">HogQL docs</a>).</p>
+<p>Even better: you can sync external data sources (like your Stripe
+customers or production database) into PostHog’s data warehouse and join
+them directly with your event data (<a
+href="https://posthog.com/data-warehouse">Data warehouse</a>).</p>
+<p>Here’s what that looks like in practice:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">events</span>.distinct_id,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="kw">AS</span> event_count</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="kw">events</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> prod_stripe_customer</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> <span class="kw">events</span>.distinct_id <span class="op">=</span> prod_stripe_customer.email</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">events</span>.distinct_id</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> event_count <span class="kw">DESC</span></span></code></pre></div>
+<p>This query joins your product events with your Stripe customer
+data—no export pipeline required (<a
+href="https://posthog.com/docs/data-warehouse/query">Data warehouse
+query examples</a>).</p>
+<p><strong>Mixpanel</strong> offers JQL (JavaScript Query Language) for
+custom queries, but they’ve stated it’s <strong>“currently in
+maintenance mode”</strong> (<a
+href="https://docs.mixpanel.com/docs/reports/apps/jql">JQL
+docs</a>).</p>
+<p><strong>Amplitude</strong> takes a different approach—their platform
+can run directly on top of your data warehouse, so you query your
+warehouse, not Amplitude (<a
+href="https://posthog.com/blog/posthog-vs-amplitude">PostHog vs
+Amplitude</a>).</p>
+<p>The practical difference: <strong>PostHog is
+warehouse-synced</strong> (brings data in), while <strong>Amplitude is
+warehouse-native</strong> (sits on top of your existing warehouse). Pick
+based on where your data lives and how your team works.</p>
+<h3 id="feature-flags-and-experiments-one-tool-vs-three">3) Feature
+flags and experiments (one tool vs three)</h3>
+<p>If you’re using analytics to ship product changes, you need three
+things: 1. <strong>Feature flags</strong> to control rollouts 2.
+<strong>Experiments</strong> to measure impact 3.
+<strong>Analytics</strong> to understand what happened</p>
+<p>Most companies use three separate tools for this. That means three
+vendors, three integrations, and data that doesn’t quite line up.</p>
+<p><strong>PostHog bundles all three.</strong> You can flag a feature,
+run an experiment, and analyze results in one platform (<a
+href="https://posthog.com/feature-flags">Feature flags</a>, <a
+href="https://posthog.com/experiments">Experiments</a>).</p>
+<p><strong>Mixpanel</strong> positions experimentation and feature flags
+as <strong>“available for Enterprise plans”</strong> (<a
+href="https://mixpanel.com/blog/mixpanel-experimentation-feature-flags/">Mixpanel
+experimentation</a>).</p>
+<p><strong>Amplitude</strong> includes feature flags in their pricing
+tiers (<a href="https://amplitude.com/pricing">Amplitude
+pricing</a>).</p>
+<p>If you ship weekly and measure everything, having one integrated loop
+beats juggling three tools.</p>
+<h3 id="the-limits-that-bite-you-later">4) The limits that bite you
+later</h3>
+<p>Here’s what nobody tells you about analytics platforms: the gotchas
+aren’t in the headline features. They’re in the fine print.</p>
+<p><strong>Saved reports:</strong> Mixpanel’s free plan limits you to
+<strong>5 saved reports</strong> (<a
+href="https://mixpanel.com/pricing/">Mixpanel pricing</a>). Once you
+have 10 dashboards your team actually uses, you’re paying.</p>
+<p><strong>Cohorts:</strong> Amplitude’s Plus plan lets you
+<strong>“Create up to 5 cohorts”</strong> for analysis (<a
+href="https://community.amplitude.com/announcements-56/introducing-the-plus-plan-elevate-your-analytics-with-our-new-49-plan-2882">Amplitude
+Plus announcement</a>). If your marketing team wants to analyze 8
+different user segments, you’re blocked.</p>
+<p><strong>Data retention:</strong> This one’s sneaky. PostHog
+<strong>guarantees 7 years retention on paid plans and 1 year on
+free</strong> (<a href="https://posthog.com/pricing">PostHog
+pricing</a>). Mixpanel recently updated their default retention to
+<strong>2 years, effective September 1, 2025</strong> (<a
+href="https://docs.mixpanel.com/changelogs/2025-09-02-data-retention-update">Mixpanel
+retention update</a>).</p>
+<p>Retention matters when you need year-over-year comparisons or
+compliance audits. Check the fine print before you commit.</p>
+<hr />
+<h2 id="the-hipaa-problem-and-how-to-actually-solve-it">The HIPAA
+Problem (And How to Actually Solve It)</h2>
+<p>If you’re building healthcare software, you’ve probably heard: “You
+can’t use Google Analytics because of HIPAA.”</p>
+<p>That’s true. But the real question is: <strong>what can you
+use?</strong></p>
+<p>HIPAA requires three things for analytics: 1. <strong>Data
+minimization:</strong> Don’t collect protected health information (PHI)
+unless necessary 2. <strong>Business Associate Agreement (BAA):</strong>
+Your vendor must sign one 3. <strong>Audit trail:</strong> You need to
+prove what data was collected and how it was handled</p>
+<p>Most analytics platforms fail #2. They won’t sign a BAA, or they’ll
+only sign for enterprise customers.</p>
+<p><strong>PostHog is explicit about this:</strong> they offer BAAs for
+Cloud customers with <strong>Boost, Scale, or Enterprise
+add-ons</strong> (<a
+href="https://posthog.com/docs/privacy/hipaa-compliance">HIPAA
+compliance</a>). They even provide a <a
+href="https://posthog.com/baa">BAA generator</a> to create agreements
+for countersignature.</p>
+<p>But here’s the part that matters more: <strong>because PostHog is
+open-source, you can read the code to verify how data is
+processed.</strong> For a SOC 2 or HIPAA audit, you can walk auditors
+through the actual implementation—not just marketing claims.</p>
+<p>Can you do that with a closed-source platform? No.</p>
+<hr />
+<h2 id="when-posthog-makes-sense-and-when-it-doesnt">When PostHog Makes
+Sense (And When It Doesn’t)</h2>
+<p>PostHog tends to win when:</p>
+<p><strong>You need developer-friendly workflows.</strong> If your team
+writes SQL, deploys infrastructure, and wants to build custom analysis,
+PostHog fits naturally.</p>
+<p><strong>You need transparent compliance.</strong> Healthcare,
+fintech, and government teams can audit the code and prove their setup
+meets requirements.</p>
+<p><strong>You want one integrated stack.</strong> Analytics + session
+replay + feature flags + experiments in one platform beats managing four
+vendors.</p>
+<p>PostHog might not be the right choice when:</p>
+<p><strong>Your organization is standardized on another
+ecosystem.</strong> If everyone uses Amplitude and your data team has
+years of pipelines built around it, switching has real costs.</p>
+<p><strong>You need very specific enterprise features.</strong> Some
+platforms offer advanced governance, predictive audiences, or AI-powered
+insights that PostHog doesn’t prioritize.</p>
+<hr />
+<h2 id="how-to-actually-migrate-without-breaking-everything">How to
+Actually Migrate (Without Breaking Everything)</h2>
+<p>If you’re switching from Mixpanel, Amplitude, or a homegrown system,
+here’s the pattern that works:</p>
+<p><strong>Step 1: Dual-write for 2-4 weeks.</strong> Send events to
+both the old and new platform. This gives you time to rebuild dashboards
+and catch discrepancies.</p>
+<p><strong>Step 2: Rebuild only what matters.</strong> Don’t try to
+recreate every dashboard. Focus on the 5-10 charts your team actually
+uses to make decisions—activation funnel, retention curves, key feature
+adoption.</p>
+<p><strong>Step 3: Validate definitions carefully.</strong> Make sure
+event names, user identity logic, and any account/group mappings work
+the same way. Mismatched definitions will make you distrust the new
+tool.</p>
+<p><strong>Step 4: Cut over gradually.</strong> Once the new dashboards
+match the old ones, start making decisions from the new platform. Retire
+old tracking code incrementally, not all at once.</p>
+<p>The goal isn’t “perfect migration.” It’s <strong>“rebuild the
+decisions we actually make.”</strong></p>
+<hr />
+<h2 id="the-bottom-line">The Bottom Line</h2>
+<p>Analytics platforms look similar on feature comparison sheets. They
+all capture events, show charts, and promise “insights.”</p>
+<p>The real differences show up in three places:</p>
+<p><strong>1. What you can prove.</strong> Open-source lets you verify
+claims. Closed-source asks you to trust them.</p>
+<p><strong>2. What you can connect.</strong> SQL access and data
+warehouse integration mean fewer export pipelines and faster
+answers.</p>
+<p><strong>3. What you can afford to measure.</strong> Pricing models
+(event-based vs MTU-based) determine whether your bill stays predictable
+as you scale.</p>
+<p>If you’re in a regulated industry, building developer tools, or just
+tired of vendor lock-in, open-source analytics isn’t a nice-to-have.
+<strong>It’s the only way to prove compliance without hiring lawyers to
+fight your vendors.</strong></p>
+<p>PostHog’s <a href="https://github.com/PostHog/posthog">30,983 GitHub
+stars</a> aren’t just about popularity. They’re about
+transparency—something traditional analytics vendors can’t offer no
+matter how good their marketing is.</p>
+<hr />
+<h2 id="about-the-author">About the Author</h2>
+<p>Jake McMahon helps SaaS companies in regulated industries
+(healthcare, fintech, professional services) build product analytics
+that drives competitive advantage while managing compliance and
+cost.</p>
+<p>Recent work includes: - <strong>Healthcare:</strong> Built compliant
+analytics infrastructure enabling continuous product optimization where
+competitors have regulatory gaps - <strong>SaaS retention:</strong>
+Developed predictive analytics pipelines using PostHog’s HogQL to
+identify at-risk customers before they churn - <strong>Cost
+transformation:</strong> Eliminated data engineering overhead by
+replacing export pipelines with direct HogQL queries</p>
+<p><strong>Connect:</strong> <a
+href="https://www.linkedin.com/in/jake-mcmahon-product-ai/">LinkedIn</a>
+| <strong>Email:</strong> jake.mrwgroup@gmail.com</p>
+<hr />
+<h2 id="sources-last-verified-january-26-2026">Sources (Last Verified:
+January 26, 2026)</h2>
+<p>Every claim in this article is backed by primary sources:</p>
+<ul>
+<li>PostHog repo stats: https://github.com/PostHog/posthog</li>
+<li>PostHog pricing and retention: https://posthog.com/pricing</li>
+<li>PostHog SQL/HogQL: https://posthog.com/docs/sql and
+https://posthog.com/docs/hogql</li>
+<li>PostHog data warehouse: https://posthog.com/data-warehouse and
+https://posthog.com/docs/data-warehouse/query</li>
+<li>PostHog HIPAA/BAA: https://posthog.com/docs/privacy/hipaa-compliance
+and https://posthog.com/baa</li>
+<li>PostHog feature flags and experiments:
+https://posthog.com/feature-flags and
+https://posthog.com/experiments</li>
+<li>Mixpanel pricing: https://mixpanel.com/pricing/</li>
+<li>Mixpanel JQL: https://docs.mixpanel.com/docs/reports/apps/jql</li>
+<li>Mixpanel retention update:
+https://docs.mixpanel.com/changelogs/2025-09-02-data-retention-update</li>
+<li>Mixpanel experimentation:
+https://mixpanel.com/blog/mixpanel-experimentation-feature-flags/</li>
+<li>Amplitude pricing: https://amplitude.com/pricing</li>
+<li>Amplitude Plus announcement:
+https://community.amplitude.com/announcements-56/introducing-the-plus-plan-elevate-your-analytics-with-our-new-49-plan-2882</li>
+<li>PostHog comparison posts:
+https://posthog.com/blog/posthog-vs-amplitude and
+https://posthog.com/blog/posthog-vs-mixpanel</li>
+</ul>
+</body>
+</html>
