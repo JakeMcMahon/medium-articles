@@ -18,7 +18,7 @@ Published articles for Medium import via GitHub Pages.
 
 ## Pending Articles
 
-1. **How PostHog Beat Billion-Dollar Incumbents With Open-Source Analytics** - `posthog-migration.html`
+1. **How PostHog Competes With Amplitude and Mixpanel (And Why Open-Source Matters for Analytics)** - `posthog-migration.html`
    - Medium Import URL: https://jakemcmahon.github.io/medium-articles/posthog-migration.html
 2. **The First Dashboard That Actually Drives Decisions** - `first-dashboard-that-drives-decisions.html`
    - Medium Import URL: https://jakemcmahon.github.io/medium-articles/first-dashboard-that-drives-decisions.html
