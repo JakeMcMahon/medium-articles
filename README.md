@@ -18,9 +18,11 @@ Published articles for Medium import via GitHub Pages.
 
 ## Pending Articles
 
-1. **The First Dashboard That Actually Drives Decisions** - `first-dashboard-that-drives-decisions.html`
+1. **How PostHog Beat Billion-Dollar Incumbents With Open-Source Analytics** - `posthog-migration.html`
+   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/posthog-migration.html
+2. **The First Dashboard That Actually Drives Decisions** - `first-dashboard-that-drives-decisions.html`
    - Medium Import URL: https://jakemcmahon.github.io/medium-articles/first-dashboard-that-drives-decisions.html
-2. **Make No Mistakes: The AI Misconceptions That Sink Projects** - `make-no-mistakes-ai-misconceptions.html`
+3. **Make No Mistakes: The AI Misconceptions That Sink Projects** - `make-no-mistakes-ai-misconceptions.html`
    - Medium Import URL: https://jakemcmahon.github.io/medium-articles/make-no-mistakes-ai-misconceptions.html
 
 ## How to Import to Medium
