@@ -266,10 +266,10 @@ analytics</li>
 </ul>
 <p>These incumbents had massive advantages: brand recognition,
 established customer bases, extensive feature sets, and marketing
-budgets exceeding $35M annually.</p>
+budgets exceeding <strong>$35M annually</strong>.</p>
 <p>Then PostHog launched as an open-source alternative. Three years
-later: $40M ARR, 40,000+ deployments, beating incumbents in
-developer-focused companies.</p>
+later: <strong>$40M ARR, 40,000+ deployments</strong>, beating
+incumbents in developer-focused companies.</p>
 <p>How does an open-source startup disrupt billion-dollar incumbents?
 The answer reveals fundamental shifts in how developers choose tools—and
 why healthcare companies desperately need these shifts.</p>
@@ -286,8 +286,8 @@ them, you don’t know how it’s processed:</p>
 <li>Are there security vulnerabilities?</li>
 <li>Can you verify HIPAA compliance?</li>
 </ul>
-<p>For general SaaS, this is annoying. For healthcare, it’s
-disqualifying.</p>
+<p>For general SaaS, this is annoying. For healthcare, <strong>it’s
+disqualifying</strong>.</p>
 <p><strong>Developer reaction:</strong> “I don’t trust black-box
 analytics with our patient data.”</p>
 <h3 id="problem-2-pricing-lock-in">Problem #2: Pricing Lock-In</h3>
@@ -392,14 +392,11 @@ value: $2M+ annual engineering time - Examples: - Session replay initial
 implementation - 30+ integrations (Slack, Zapier, Segment) -
 Documentation translated to 10+ languages</p>
 <p><strong>Compare: Closed-Source Distribution Costs</strong></p>
-<p><strong>Mixpanel distribution:</strong> - Paid ads: $5M+/year - Sales
-team: $20M+/year - Marketing: $10M+/year - <strong>Total:
-$35M+/year</strong></p>
-<p><strong>PostHog distribution:</strong> - GitHub: Free (community
-contributes) - Content marketing: $1M/year - Paid ads: $500K/year -
-<strong>Total: $1.5M/year</strong></p>
-<p><strong>Savings: $33.5M/year (94% lower CAC through
-open-source)</strong></p>
+<p><strong>Mixpanel distribution:</strong> $35M+/year - Paid ads: $5M+ -
+Sales team: $20M+ - Marketing: $10M+</p>
+<p><strong>PostHog distribution:</strong> $1.5M/year - GitHub: Free
+(community contributes) - Content marketing: $1M - Paid ads: $500K</p>
+<p><strong>Result: 94% lower customer acquisition cost</strong></p>
 <hr />
 <h2 id="pricing-disruption-through-open-source-economics">Pricing
 Disruption Through Open-Source Economics</h2>
@@ -411,10 +408,10 @@ Support: Community forum</p>
 (volume discounts) - Example: 1M events/month = $450/month - Includes:
 Managed infrastructure, support, SSO, SAML</p>
 <p><strong>Price Comparison (1M Events/Month):</strong></p>
-<pre><code>Mixpanel:        $999/month (Growth plan)
-Amplitude:       $1,200/month (estimated)
-PostHog Cloud:   $450/month (50-70% cheaper)
-PostHog Self-Hosted: $200/month (infrastructure only, 80% cheaper)</code></pre>
+<pre><code>Mixpanel:             $999/month
+Amplitude:            $1,200/month
+PostHog Cloud:        $450/month (50-70% cheaper)
+PostHog Self-Hosted:  $200/month (80% cheaper)</code></pre>
 <h3 id="why-posthog-can-underprice">Why PostHog Can Underprice</h3>
 <p><strong>Open-source development:</strong> Community contributes 30%
 of engineering work free</p>
@@ -530,30 +527,29 @@ understand user behavior</p>
 HIPAA-eligible infrastructure - Open-source code verifiable for
 compliance - Infrastructure costs: $200/month - Result: Full product
 analytics with compliance built-in, not bolted-on</p>
-<p><strong>What This Enabled:</strong> - Understand how users actually
-interact with the product (impossible without analytics) - Measure
-whether product changes improve adoption and engagement - Make
-data-informed decisions about feature prioritization and product roadmap
-- Competitive advantage: Continuous product optimization while
-competitors either have compliance gaps or can’t afford analytics at
-all</p>
+<p><strong>What This Enabled:</strong> - <strong>Understand user
+behavior</strong> (impossible without analytics) - <strong>Measure
+product impact</strong> on adoption and engagement -
+<strong>Data-informed roadmap decisions</strong> instead of guessing -
+<strong>Competitive advantage:</strong> Continuous optimization while
+competitors have <strong>compliance gaps or can’t afford
+analytics</strong></p>
 <p><strong>Contrast with Professional Services/SaaS:</strong></p>
 <p>A different company needed predictive analytics to understand which
 customers would renew.</p>
-<p><strong>With Amplitude:</strong> Can export data via API to S3, then:
-- Build Python pipelines to process events - Query payment systems
-separately (Stripe API) - Join data manually in analysis notebooks -
-Update models on schedule - Result: Churn prediction works, but requires
-ongoing pipeline maintenance</p>
+<p><strong>With Amplitude:</strong> Can export data via API to S3 -
+Build Python pipelines → Query Stripe separately → Manual joins →
+Schedule updates - <strong>Result:</strong> Works but <strong>requires
+ongoing pipeline maintenance</strong></p>
 <p><strong>With PostHog Cloud:</strong> Direct query + external database
-joins: - HogQL query joins PostHog events with your Postgres customer
-data in one query - Access current data immediately (no export delays) -
-Business teams can write their own analyses (team enablement) - Models
-stay current without pipeline maintenance - Result: Churn prediction
-that updates in real-time with zero infrastructure overhead</p>
-<p><strong>Strategic Impact:</strong> Same capability, dramatically
-lower operational burden. Data engineers spend time on strategy instead
-of pipeline maintenance.</p>
+joins - HogQL query <strong>joins events with your database in one
+query</strong> - <strong>Access current data immediately</strong> (no
+export delays) - <strong>Business teams self-serve</strong> (no data
+engineer bottleneck) - Models stay current without maintenance -
+<strong>Result:</strong> Real-time with <strong>zero infrastructure
+overhead</strong></p>
+<p><strong>Strategic Impact:</strong> Same capability,
+<strong>dramatically lower operational burden</strong></p>
 <hr />
 <h2 id="why-hogql-database-connectivity-changes-everything">Why HogQL +
 Database Connectivity Changes Everything</h2>
@@ -587,13 +583,13 @@ class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#c
 <p>One query. Connected databases. No export pipelines. Instant
 results.</p>
 <h3 id="speed-to-insight-difference">Speed-to-Insight Difference</h3>
-<p><strong>Amplitude:</strong> Days or weeks per analysis
-(infrastructure → pipeline → scripts → results)</p>
-<p><strong>PostHog:</strong> Minutes (direct query → joined external
-data → results)</p>
-<p><strong>For product teams:</strong> Self-serve analytics instead of
-data engineer bottlenecks. Questions get answered with current data, not
-stale exports.</p>
+<p><strong>Amplitude:</strong> Days or weeks per analysis -
+Infrastructure setup → Python pipelines → Manual joins → Results</p>
+<p><strong>PostHog:</strong> Minutes per analysis - Direct HogQL query →
+Connected databases → Results</p>
+<p><strong>Business impact:</strong> <strong>Self-serve
+analytics</strong> instead of data engineer bottlenecks. Questions
+answered with <strong>current data</strong>, not stale exports.</p>
 <hr />
 <h2 id="when-open-source-works-and-when-it-doesnt">When Open-Source
 Works (and When It Doesn’t)</h2>
@@ -711,33 +707,35 @@ Sustainably</h3>
 <p>Maintain margins while charging 10x less.</p>
 <hr />
 <h2 id="the-bottom-line">The Bottom Line</h2>
-<p>PostHog beat billion-dollar incumbents through open-source
+<p>PostHog beat billion-dollar incumbents through <strong>open-source
 distribution, developer trust, 10x cheaper pricing, and community-driven
-product velocity.</p>
-<p>$40M ARR in 4 years. 22K GitHub stars. 40,000+ deployments.</p>
-<p>But the real impact is enabling use cases that were impossible
-before.</p>
+product velocity</strong>.</p>
+<p><strong>$40M ARR in 4 years. 22K GitHub stars. 40,000+
+deployments.</strong></p>
+<p>But the real impact is <strong>enabling use cases that were
+impossible before</strong>.</p>
 <p><strong>Three real-world categories of companies
 benefiting:</strong></p>
 <ol type="1">
 <li><p><strong>Regulated Industries:</strong> Healthcare/fintech
-companies need compliant analytics. PostHog’s self-hosting + open-source
-verification is the only viable path to SOC 2, HIPAA, and other audit
-requirements.</p></li>
-<li><p><strong>Data-Driven Teams:</strong> Companies building ML models,
-churn prediction, retention analysis, and complex attribution. PostHog’s
-API enables custom Python scripts, direct data warehouse integration,
-and behavioral feature extraction.</p></li>
-<li><p><strong>Cost-Constrained Scale:</strong> Companies that would
-otherwise choose between (a) limited managed analytics at $1,000+/month
-or (b) expensive custom builds at $200K+. PostHog offers
-enterprise-grade analytics at $200/month infrastructure cost.</p></li>
+companies need <strong>compliant analytics</strong>. PostHog’s
+<strong>self-hosting + open-source verification</strong> is the only
+viable path to SOC 2, HIPAA, and other audit requirements.</p></li>
+<li><p><strong>Data-Driven Teams:</strong> Companies building <strong>ML
+models, churn prediction, retention analysis, and complex
+attribution</strong>. PostHog’s API enables custom Python scripts,
+direct data warehouse integration, and behavioral feature
+extraction.</p></li>
+<li><p><strong>Cost-Constrained Scale:</strong> Companies choosing
+between <strong>(a) $1,000+/month managed analytics or (b) $200K+ custom
+builds</strong>. PostHog offers <strong>enterprise-grade analytics at
+$200/month</strong> infrastructure cost.</p></li>
 </ol>
-<p><strong>The unifying theme:</strong> These use cases have different
-needs, but they all require what incumbents fundamentally can’t offer: -
-Code transparency (verification, not trust) - Data ownership
-(self-hosting, not SaaS lock-in) - Extensibility (APIs, not
-dashboards)</p>
+<p><strong>The unifying theme:</strong> All require what incumbents
+fundamentally can’t offer: - <strong>Code transparency</strong>
+(verification, not trust) - <strong>Data ownership</strong>
+(self-hosting, not SaaS lock-in) - <strong>Extensibility</strong> (APIs,
+not dashboards)</p>
 <p>Open-source isn’t just a business model. It’s a competitive moat for
 products serving technically sophisticated, privacy-critical, or
 data-intensive markets.</p>
