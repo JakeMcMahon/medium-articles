@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html lang="" xml:lang="" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta content="pandoc" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>posthog-vs-amplitude-mixpanel-v4</title>
+<style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="how-posthog-competes-with-amplitude-and-mixpanel-and-why-open-source-matters-for-analytics">How
+PostHog Competes With Amplitude and Mixpanel (And Why Open-Source
+Matters for Analytics)</h1>
+<p>PostHog has been open-source since 2020. As of 2026-01-26, the
+<code>PostHog/posthog</code> repo has <strong>30,983 GitHub
+stars</strong> and <strong>2,218 forks</strong> (<a href="https://github.com/PostHog/posthog">GitHub</a>).</p>
+<p>This isn't a "feature checklist" story. The biggest differences
+between PostHog, Amplitude, and Mixpanel show up in four places:
+<strong>what you pay for, how you query, what you can connect, and how
+you prove compliance.</strong></p>
+<hr/>
+<h2 id="tldr">TL;DR</h2>
+<p>If you skim one section, skim this:</p>
+<ul>
+<li><strong>Open-source changes risk:</strong> You can inspect code and
+deployment options instead of trusting a black box (<a href="https://github.com/PostHog/posthog">GitHub</a>).</li>
+<li><strong>Pricing is structurally different:</strong> PostHog and
+Mixpanel are event-based; Amplitude is MTU-based (<a href="https://posthog.com/pricing">PostHog pricing</a>, <a href="https://mixpanel.com/pricing/">Mixpanel pricing</a>, <a href="https://amplitude.com/pricing">Amplitude pricing</a>).</li>
+<li><strong>PostHog is built for joining product + business
+data:</strong> SQL access plus a built-in data warehouse means fewer
+export pipelines (<a href="https://posthog.com/docs/sql">SQL</a>, <a href="https://posthog.com/data-warehouse">Data warehouse</a>).</li>
+<li><strong>HIPAA reality:</strong> If you need a BAA, PostHog documents
+when they provide one for PostHog Cloud (<a href="https://posthog.com/docs/privacy/hipaa-compliance">HIPAA
+compliance</a>, <a href="https://posthog.com/baa">BAA
+generator</a>).</li>
+</ul>
+<hr/>
+<h2 id="why-open-source-matters-for-analytics">Why Open-Source Matters
+for Analytics</h2>
+<p><strong>Closed-source analytics asks you to trust what you can't
+see.</strong> You ship events to a vendor, and somewhere in the middle
+your data is transformed, sampled, filtered, and stored behind a black
+box.</p>
+<p><strong>Open-source flips the relationship:</strong> instead of
+"trust us," it's "verify it." You can inspect how events are processed,
+validate what's collected (and what isn't), and prove your setup meets
+internal standards or external requirements.</p>
+<p><strong>This matters most when you're accountable for privacy and
+security</strong> (healthcare, fintech, government), but it also matters
+any time you want to avoid lock-in or build analytics that joins product
+behavior to business reality.</p>
+<hr/>
+<h2 id="what-actually-differs-between-posthog-amplitude-and-mixpanel">What
+Actually Differs Between PostHog, Amplitude, and Mixpanel</h2>
+<p>Here's the practical comparison that tends to matter once you're past
+the "basic charts" stage.</p>
+<ul>
+<li><strong>Pricing unit:</strong> PostHog and Mixpanel are event-based;
+Amplitude is MTU-based (<a href="https://posthog.com/pricing">PostHog
+pricing</a>, <a href="https://mixpanel.com/pricing/">Mixpanel
+pricing</a>, <a href="https://amplitude.com/pricing">Amplitude
+pricing</a>).</li>
+<li><strong>SQL-style querying in-product:</strong> PostHog supports
+HogQL/SQL; Mixpanel offers JQL (in "maintenance mode"); Amplitude's
+model is often warehouse/integration-driven (<a href="https://posthog.com/docs/sql">PostHog SQL</a>, <a href="https://docs.mixpanel.com/docs/reports/apps/jql">Mixpanel
+JQL</a>).</li>
+<li><strong>Feature flags + experiments:</strong> PostHog includes them;
+Mixpanel says feature flagging + experimentation is Enterprise;
+Amplitude positions feature flags as included (<a href="https://posthog.com/feature-flags">PostHog feature flags</a>, <a href="https://posthog.com/experiments">PostHog experiments</a>, <a href="https://mixpanel.com/blog/mixpanel-experimentation-feature-flags/">Mixpanel
+experimentation</a>, <a href="https://amplitude.com/pricing">Amplitude
+pricing</a>).</li>
+<li><strong>Session replay:</strong> PostHog includes 5k recordings
+free; Mixpanel includes 10K replays on Free and 20K on Growth; Amplitude
+lists 1,000/month on Starter and 10,000/month on Plus (<a href="https://posthog.com/pricing">PostHog pricing</a>, <a href="https://mixpanel.com/pricing/">Mixpanel pricing</a>, <a href="https://amplitude.com/pricing">Amplitude pricing</a>).</li>
+<li><strong>Data retention:</strong> PostHog states 1 year on free, 7
+years on paid; Mixpanel documents a 2-year default retention update
+effective 2025-09-01 (<a href="https://posthog.com/pricing">PostHog
+pricing</a>, <a href="https://docs.mixpanel.com/changelogs/2025-09-02-data-retention-update">Mixpanel
+retention update</a>).</li>
+</ul>
+<p>Beyond the mechanics, the bigger difference is what each platform
+optimizes for day-to-day: an all-in-one stack vs a narrower analytics
+core, developer workflows vs non-technical workflows, and
+warehouse-native vs warehouse-synced setups.</p>
+<ul>
+<li><strong>All-in-one vs point solutions:</strong> PostHog bundles
+product analytics, web analytics, session replay, feature
+flags/experiments, surveys, error tracking, and a data warehouse into
+one platform (<a href="https://github.com/PostHog/posthog">GitHub repo
+description</a>, <a href="https://posthog.com/blog/posthog-vs-mixpanel">PostHog vs
+Mixpanel</a>).</li>
+<li><strong>Warehouse-native vs warehouse-synced:</strong> Amplitude can
+run directly on top of your data warehouse, while PostHog syncs to/from
+warehouses rather than sitting directly on top of them (<a href="https://posthog.com/blog/posthog-vs-amplitude">PostHog vs
+Amplitude</a>).</li>
+<li><strong>Data quality under tracking blockers:</strong> Using a
+reverse proxy (sending events from your own domain) can reduce the
+impact of tracking blockers on event capture (<a href="https://posthog.com/blog/posthog-vs-mixpanel">PostHog vs
+Mixpanel</a>).</li>
+</ul>
+<h3 id="what-you-pay-for-events-vs-mtus-vs-add-ons">1) What you pay for
+(events vs MTUs vs add-ons)</h3>
+<p>Pricing isn't just cost. <strong>It determines what you can afford to
+measure</strong> as your team scales.</p>
+<ul>
+<li><strong>PostHog:</strong> Usage-based pricing for Product Analytics
+starts from <strong>$0.00005/event</strong> and includes a free
+allowance of the <strong>first 1 million events</strong>. The pricing
+page also shows free allowances for things like <strong>session
+replay</strong> and <strong>feature flag requests</strong> (<a href="https://posthog.com/pricing">PostHog pricing</a>).</li>
+<li><strong>Mixpanel:</strong> Growth includes <strong>1M monthly events
+free</strong> and then <strong>$0.28 per 1K events after</strong>, and
+includes plan-specific limits like <strong>20K monthly session replays
+free</strong>. Mixpanel's free plan lists <strong>up to 5 saved
+reports</strong> and <strong>10K monthly session replays</strong> (<a href="https://mixpanel.com/pricing/">Mixpanel pricing</a>).</li>
+<li><strong>Amplitude:</strong> Pricing is structured around
+<strong>MTUs (monthly tracked users)</strong>, with Plus
+<strong>starting at $49/mo</strong>. Amplitude's free tier highlights
+<strong>50K MTUs (and up to 10M events)</strong> (<a href="https://amplitude.com/pricing">Amplitude pricing</a>).</li>
+</ul>
+<p><strong>Practical implication:</strong> if your product generates
+lots of events per user (or you track aggressively), event-based pricing
+can ramp quickly. If you have lots of low-activity users, MTU-based
+pricing can ramp quickly.</p>
+<p>One nuance teams miss: MTU pricing can feel cheap until you
+instrument "helpful" tracking for lots of lightly-active users. Event
+pricing can feel cheap until you add autocapture + high-frequency
+events. The right answer is the one that matches your actual product
+behavior.</p>
+<p>If you're choosing between event-based platforms, it can still matter
+how pricing treats anonymous usage. In its Mixpanel comparison, PostHog
+notes that both are event-priced, but Mixpanel charges the same for
+anonymous and identified events while PostHog differentiates them (<a href="https://posthog.com/blog/posthog-vs-mixpanel">PostHog vs
+Mixpanel</a>).</p>
+<h3 id="querying-and-joining-product-business-data">2) Querying and
+joining product + business data</h3>
+<p>PostHog is unusually direct about SQL-first workflows:</p>
+<ul>
+<li><strong>SQL access:</strong> PostHog supports querying with
+SQL/HogQL (<a href="https://posthog.com/docs/sql">SQL</a>).</li>
+<li><strong>Data warehouse:</strong> You can sync data sources into
+PostHog's data warehouse and query across them (<a href="https://posthog.com/data-warehouse">Data warehouse</a>).</li>
+</ul>
+<p>Mixpanel supports custom querying via JQL, which Mixpanel notes is
+<strong>"currently in maintenance mode"</strong> (<a href="https://docs.mixpanel.com/docs/reports/apps/jql">Mixpanel
+JQL</a>).</p>
+<p>The difference shows up when you need analysis like "product behavior
++ revenue + account attributes" and you don't want to maintain exports
+just to answer basic questions.</p>
+<p>Concrete example: PostHog's HogQL is designed for writing queries
+that join your events with warehouse tables you sync in (for example,
+Stripe customers) (<a href="https://posthog.com/docs/hogql">HogQL</a>,
+<a href="https://posthog.com/docs/data-warehouse/query">Data warehouse
+query</a>).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>  <span class="kw">events</span>.distinct_id,</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>  <span class="fu">count</span>() <span class="kw">AS</span> event_count</span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="kw">FROM</span> <span class="kw">events</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> prod_stripe_customer</span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a>  <span class="kw">ON</span> <span class="kw">events</span>.distinct_id <span class="op">=</span> prod_stripe_customer.email</span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">events</span>.distinct_id</span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> event_count <span class="kw">DESC</span></span></code></pre></div>
+<p>If your operating model is "everything lives in the warehouse,"
+PostHog notes Amplitude can run directly on top of your data warehouse,
+while PostHog syncs to/from warehouses rather than sitting on top of
+them (<a href="https://posthog.com/blog/posthog-vs-amplitude">PostHog vs
+Amplitude</a>).</p>
+<h3 id="experimentation-and-feature-flags">3) Experimentation and
+feature flags</h3>
+<p>If analytics is part of how you ship product changes, flags +
+experiments determine whether you have one loop (build, ship, measure)
+or three tools glued together.</p>
+<ul>
+<li><strong>PostHog:</strong> Built-in feature flags and experiments (<a href="https://posthog.com/feature-flags">Feature flags</a>, <a href="https://posthog.com/experiments">Experiments</a>).</li>
+<li><strong>Mixpanel:</strong> Mixpanel states "Experimentation 2.0 and
+Feature Flagging are available for Enterprise plans" (<a href="https://mixpanel.com/blog/mixpanel-experimentation-feature-flags/">Mixpanel
+experimentation</a>).</li>
+<li><strong>Amplitude:</strong> Pricing pages position feature flags as
+included (<a href="https://amplitude.com/pricing">Amplitude
+pricing</a>).</li>
+</ul>
+<p>If you're using analytics to ship and measure product changes, this
+is the difference between "analytics plus a separate rollout system" and
+a tighter loop.</p>
+<h3 id="cohorts-and-governance-limits-the-stuff-that-bites-later">4)
+Cohorts and governance limits (the stuff that bites later)</h3>
+<p>If you're comparing plans, watch for "soft" limits like chart saves
+and cohort limits. They're easy to miss, and they change what teams can
+do day-to-day.</p>
+<p>One example that's explicit in Amplitude's own announcement: the Plus
+plan supports "Create up to 5 cohorts" for cohort analysis (<a href="https://community.amplitude.com/announcements-56/introducing-the-plus-plan-elevate-your-analytics-with-our-new-49-plan-2882">Amplitude
+Plus announcement</a>).</p>
+<h3 id="data-retention-is-not-the-same-across-vendors">5) Data retention
+is not the same across vendors</h3>
+<p>Retention is easy to ignore until you need long-range baselines (or a
+compliance conversation). Then it suddenly matters.</p>
+<ul>
+<li><strong>PostHog:</strong> "Data ... is guaranteed to be retained for
+7 years on any paid plan and 1 year on a free plan" (<a href="https://posthog.com/pricing">PostHog pricing</a>).</li>
+<li><strong>Mixpanel:</strong> Mixpanel documents a shift to a
+<strong>2-year default data retention period</strong>, effective
+<strong>September 1, 2025</strong> (<a href="https://docs.mixpanel.com/changelogs/2025-09-02-data-retention-update">Mixpanel
+changelog</a>).</li>
+</ul>
+<p>Retention rules change. Treat this as a procurement checklist item,
+not an assumption.</p>
+<hr/>
+<h2 id="the-compliance-constraint-healthcare-friendly-analytics-without-guesswork">The
+Compliance Constraint (Healthcare-Friendly Analytics Without
+Guesswork)</h2>
+<p>HIPAA doesn't mean "no analytics." It means you must be deliberate
+about what data you capture, how you process it, and what agreements you
+have in place.</p>
+<p>PostHog documents their HIPAA stance and BAA availability:</p>
+<ul>
+<li>PostHog offers BAAs for PostHog Cloud for users with <strong>Boost,
+Scale or Enterprise add-ons</strong> (<a href="https://posthog.com/docs/privacy/hipaa-compliance">PostHog and
+HIPAA compliance</a>).</li>
+<li>They provide a <strong>BAA generator</strong> to create a Business
+Associate Agreement for countersignature (<a href="https://posthog.com/baa">BAA generator</a>).</li>
+</ul>
+<p>In PostHog's own comparisons, they also describe BAAs as part of
+their platform packages/add-ons, alongside items like SSO enforcement
+and a managed reverse proxy (<a href="https://posthog.com/blog/posthog-vs-mixpanel">PostHog vs
+Mixpanel</a>, <a href="https://posthog.com/blog/posthog-vs-amplitude">PostHog vs
+Amplitude</a>).</p>
+<p><strong>The tactical takeaway:</strong> pick your analytics stack
+based on what you can prove and control (data minimization, redaction,
+and clear vendor terms), not what a marketing page implies.</p>
+<hr/>
+<h2 id="a-practical-migration-pattern-if-youre-switching-tools">A
+Practical Migration Pattern (If You're Switching Tools)</h2>
+<p>Whether you're migrating from Mixpanel, Amplitude, or something
+homegrown, the cleanest approach is usually:</p>
+<ol type="1">
+<li><strong>Dual-write:</strong> Send events to both systems
+temporarily.</li>
+<li><strong>Rebuild the few dashboards that matter:</strong> Keep parity
+tight (activation funnel, retention, key feature adoption).</li>
+<li><strong>Validate definitions:</strong> Event names, user identity,
+and any "group/account" logic.</li>
+<li><strong>Cut over:</strong> Move decision-making to the new
+dashboards; retire the old tracking gradually.</li>
+</ol>
+<p>The goal is not "copy every chart." It's "recreate the decisions your
+team actually makes."</p>
+<hr/>
+<h2 id="when-posthog-is-and-isnt-the-right-choice">When PostHog Is (and
+Isn't) the Right Choice</h2>
+<p>PostHog tends to win when you need: - <strong>Developer-friendly
+workflows</strong> (SQL, data warehouse joins, instrument-and-iterate).
+- <strong>Transparent security/compliance posture</strong> (especially
+in regulated contexts). - <strong>One stack</strong> for analytics plus
+replay plus flags/experiments.</p>
+<p>You should still consider alternatives when: - Your organization is
+strongly standardized on a different analytics ecosystem. - You want a
+very specific enterprise bundle (advanced governance, predictive
+audiences, etc.) and you're willing to pay for it.</p>
+<hr/>
+<h2 id="sources-last-checked">Sources (Last Checked)</h2>
+<p>Every factual claim above is backed by one of these links:</p>
+<ul>
+<li>PostHog repo stats: https://github.com/PostHog/posthog (checked
+2026-01-26)</li>
+<li>PostHog pricing and retention: https://posthog.com/pricing</li>
+<li>PostHog SQL/HogQL: https://posthog.com/docs/sql</li>
+<li>PostHog HogQL: https://posthog.com/docs/hogql</li>
+<li>PostHog data warehouse: https://posthog.com/data-warehouse</li>
+<li>PostHog data warehouse querying examples:
+https://posthog.com/docs/data-warehouse/query</li>
+<li>PostHog HIPAA/BAA: https://posthog.com/docs/privacy/hipaa-compliance
+and https://posthog.com/baa</li>
+<li>Mixpanel pricing: https://mixpanel.com/pricing/</li>
+<li>Mixpanel JQL maintenance note:
+https://docs.mixpanel.com/docs/reports/apps/jql</li>
+<li>Mixpanel retention update:
+https://docs.mixpanel.com/changelogs/2025-09-02-data-retention-update</li>
+<li>Amplitude pricing (MTU and $49 Plus):
+https://amplitude.com/pricing</li>
+<li>Amplitude Plus cohort limit (5 cohorts):
+https://community.amplitude.com/announcements-56/introducing-the-plus-plan-elevate-your-analytics-with-our-new-49-plan-2882</li>
+<li>Mixpanel experimentation/feature flags availability:
+https://mixpanel.com/blog/mixpanel-experimentation-feature-flags/</li>
+<li>PostHog comparison posts:
+https://posthog.com/blog/posthog-vs-amplitude and
+https://posthog.com/blog/posthog-vs-mixpanel</li>
+</ul>
+</body>
+</html>
