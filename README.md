@@ -18,12 +18,8 @@ Published articles for Medium import via GitHub Pages.
 
 ## Pending Articles
 
-1. **How PostHog Competes With Amplitude and Mixpanel (And Why Open-Source Matters for Analytics)** - `posthog-vs-amplitude-mixpanel-v6.html`
-   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/posthog-vs-amplitude-mixpanel-v6.html
-2. **The First Dashboard That Actually Drives Decisions** - `first-dashboard-that-drives-decisions.html`
-   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/first-dashboard-that-drives-decisions.html
-3. **Make No Mistakes: The AI Misconceptions That Sink Projects** - `make-no-mistakes-ai-misconceptions.html`
-   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/make-no-mistakes-ai-misconceptions.html
+1. **Why Teams Add "Make No Mistakes" to AI Prompts (And Why It Never Works)** - `make-no-mistakes-ai-prompts.html`
+   - Medium Import URL: https://jakemcmahon.github.io/medium-articles/make-no-mistakes-ai-prompts.html
 
 ## How to Import to Medium
 

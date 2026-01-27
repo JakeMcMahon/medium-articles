@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Why Teams Add "Make No Mistakes" to AI Prompts (And Why It Never Works)</title>
+</head>
+<body>
+
+<h1>Why Teams Add "Make No Mistakes" to AI Prompts (And Why It Never Works)</h1>
+
+<p>After working with 50+ teams on AI features, I can spot the failure pattern in week 1.</p>
+
+<p>It starts with optimism. AI will save the struggling product. AI will cut costs. AI will differentiate in the market. Leadership is excited. The team is energized. The demos look incredible.</p>
+
+<p>Then the model ships. And reality does not match the demo.</p>
+
+<p>What happens next reveals everything. Teams that skip strategy end up in the same place.</p>
+
+<p>Teams do not fix the strategy. They do not audit the data. They do not build evaluation systems.</p>
+
+<p>They edit the prompt: "Be more accurate." "Make no mistakes." "Think step by step." "Act as an expert and only give correct answers."</p>
+
+<p><strong>This is not engineering. This is magical thinking.</strong></p>
+
+<p>The moment you see "make no mistakes" in a prompt, the project has already failed. Not because the model is bad. Because the team is treating symptoms instead of building systems.</p>
+
+<p>This post is about <strong>the behavioral pattern that predicts failure</strong>, <strong>why strategy gets skipped</strong>, and <strong>what it takes to build AI systems that do not require desperate prompting</strong>.</p>
+
+<h2>TL;DR</h2>
+
+<ul>
+<li><strong>Desperation prompting is a symptom, not a solution</strong> - when teams add "make no mistakes" to prompts, they have already skipped strategy.</li>
+<li><strong>The pattern is predictable</strong> - hope → confusion → desperation → blame the model.</li>
+<li><strong>Out-of-the-box LLMs are not always enough</strong> - real systems may need fine-tuning, RAG, agent frameworks, or non-LLM approaches (CV, traditional ML, deep learning).</li>
+<li><strong>The same traps from classical ML still apply</strong> - hidden dependencies, data cascades, and failure modes.</li>
+<li><strong>Strategy prevents desperation</strong> - clear objectives, clean data, and operational guardrails eliminate the need for magical prompting.</li>
+</ul>
+
+<h2>The Pattern (And How to Recognize It Early)</h2>
+
+<p>When teams skip strategy, it always plays out the same way:</p>
+
+<p><strong>Week 1: Optimism</strong><br>
+"We'll add AI and differentiate the product. Demos look great. This will unlock growth."</p>
+
+<p><strong>Week 4: Confusion</strong><br>
+"Why are the outputs inconsistent? Why does it work sometimes and fail other times?"</p>
+
+<p><strong>Week 8: Desperation</strong><br>
+"Can we just tell it to be more accurate? Let's add 'make no mistakes' to the prompt. Maybe we need better instructions."</p>
+
+<p><strong>Week 12: Blame</strong><br>
+"Maybe this model isn't good enough. Should we try a different one? Maybe AI isn't ready for this use case."</p>
+
+<p><strong>The model was never the problem. The absence of strategy was.</strong></p>
+
+<p>Teams skip the foundations—clear objectives, clean data, evaluation systems, risk frameworks. They treat AI like a feature they can prompt into working. And when it does not work, they add more instructions. More desperation.</p>
+
+<h2>The Desperation Prompts (What I Find When Teams Call for Help)</h2>
+
+<p>When AI features start failing, teams do not fix the system. They edit the prompt.</p>
+
+<p>Real examples I find when auditing production systems:</p>
+
+<ul>
+<li>"Be more accurate and precise in your responses"</li>
+<li>"Make no mistakes and only provide correct information"</li>
+<li>"Think step by step and don't hallucinate"</li>
+<li>"Act as an expert and triple-check your work before responding"</li>
+<li>"Use AI to build the AI system and make it better over time"</li>
+<li>"You are a world-class [expert]. Never make errors."</li>
+</ul>
+
+<p>None of these work. <strong>Because the problem is not the prompt. The problem is the absence of a system.</strong></p>
+
+<p>Models are probabilistic. They operate on messy inputs, incomplete context, and unclear objectives. <strong>Telling a probabilistic system to "make no mistakes" is like telling a coin flip to "always land heads."</strong></p>
+
+<p>You cannot prompt your way out of a strategy problem. You cannot instruct away technical debt. You cannot ask a model to compensate for missing data definitions, absent evaluation, or undefined success criteria.</p>
+
+<p><strong>If you are editing prompts to fix reliability, you are already failing.</strong></p>
+
+<h2>What This Pattern Reveals</h2>
+
+<p>Desperation prompting is a symptom of a deeper problem: <strong>teams treat AI as magic instead of systems</strong>.</p>
+
+<p>The behavior reveals three things:</p>
+
+<p><strong>1. Strategy was skipped</strong><br>
+If you cannot define success criteria before shipping, you will not be able to fix failures after shipping. Teams that add "make no mistakes" to prompts never defined what "mistakes" means in measurable terms.</p>
+
+<p><strong>2. Data work was avoided</strong><br>
+Prompts get desperate when data is messy. Teams try to compensate with instructions because cleaning data feels slower than editing text. But dirty data creates unreliable outputs no matter how good your prompt is.</p>
+
+<p><strong>3. Evaluation was deferred</strong><br>
+If you had offline tests, validation criteria, and monitoring, you would catch failures before users do. Desperation prompting happens when the first evaluation is production feedback.</p>
+
+<p><strong>The pattern is always the same: skip the hard work, ship fast, try to fix it with instructions.</strong></p>
+
+<p>And it never works.</p>
+
+<h2>Why This Hope Persists</h2>
+
+<p>The optimism comes from real wins:</p>
+
+<ul>
+<li>LLM demos are fast.</li>
+<li>Off-the-shelf models are good.</li>
+<li>Tooling is easier than ever.</li>
+</ul>
+
+<p>It is easy to believe the hard parts are solved. But speed hides complexity. <strong>The debt does not disappear. It just moves to later stages where it is more expensive.</strong></p>
+
+<p>Google researchers describe ML as a <strong>"high-interest credit card of technical debt"</strong> because quick wins create long-term costs if you skip fundamentals (<a href="https://research.google.com/pubs/archive/43146.pdf">Google Research, 2014</a>).</p>
+
+<h2>The Reality: Out-of-the-Box LLMs Are Not Enough</h2>
+
+<p>The current wave of "AI engineering" revolves around prompt engineering and off-the-shelf LLMs. That works for demos. It rarely works for production.</p>
+
+<p><strong>Real-world AI systems often require more than basic prompting:</strong></p>
+
+<h3>Beyond Two-Shot Prompting</h3>
+
+<p>Simple prompt patterns are a starting point, not the solution. Depending on your use case, you may need:</p>
+
+<ul>
+<li><strong>Retrieval-Augmented Generation (RAG)</strong>: Combining LLMs with knowledge bases for context-specific responses</li>
+<li><strong>Agent frameworks</strong>: Multi-step reasoning with tool use and memory</li>
+<li><strong>Prompt chaining</strong>: Breaking complex tasks into orchestrated sequences</li>
+<li><strong>Fine-tuning</strong>: Adapting pre-trained models to your domain and data</li>
+<li><strong>Reinforcement Learning from Human Feedback (RLHF)</strong>: Training models to align with specific quality criteria</li>
+<li><strong>Hybrid systems</strong>: Combining LLMs with deterministic logic, search, or structured data</li>
+</ul>
+
+<h3>When LLMs Are Not the Answer</h3>
+
+<p>Some problems cannot be solved with language models at all. If your use case requires:</p>
+
+<ul>
+<li><strong>Computer Vision (CV)</strong>: Object detection, image segmentation, visual quality control</li>
+<li><strong>Traditional ML</strong>: Classification, regression, time-series forecasting, anomaly detection</li>
+<li><strong>Deep Learning</strong>: Custom neural architectures for domain-specific problems</li>
+<li><strong>Statistical models</strong>: When interpretability, causality, or regulatory compliance matters</li>
+</ul>
+
+<p><strong>You need to build or hire for those capabilities. AI is not just LLMs. It is statistics, machine learning, computer vision, deep learning, and domain-specific modeling.</strong></p>
+
+<p>Teams that think "AI engineering" means prompting are not prepared for real-world complexity. You may need ML engineers, data scientists, or specialists in CV and deep learning—not just prompt engineers.</p>
+
+<h2>The Reality: Same Traps, New Wrapper</h2>
+
+<p>The hard parts did not go away. They just changed form.</p>
+
+<h3>Trap 1: Hidden Technical Debt</h3>
+
+<p>ML systems accrue technical debt through fragile dependencies, feedback loops, and silent failures. The original <strong>"Hidden Technical Debt in ML Systems"</strong> paper calls out how quickly these systems become brittle when you treat models like normal code (<a href="https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf">Sculley et al., NeurIPS 2015</a>).</p>
+
+<p>LLM pipelines are not immune. <strong>If your prompts depend on volatile context, your retrieval layer depends on stale data, or your evaluation is manual, the debt grows fast.</strong></p>
+
+<h3>Trap 2: Data Cascades</h3>
+
+<p>Data quality problems do not stay isolated. They cascade through labeling, training, evaluation, and product decisions. <strong>"Data Cascades"</strong> research shows how early data decisions ripple through the entire system and create downstream harm (<a href="https://storage.googleapis.com/gweb-research2023-media/pubtools/5936.pdf">Sambasivan et al., CHI 2021</a>).</p>
+
+<p>If you use AI to generate training data or summaries without a <strong>verification strategy</strong>, you can <strong>accelerate errors at scale</strong>.</p>
+
+<h3>Trap 3: No Risk Framework</h3>
+
+<p>If you do not define acceptable failure modes, <strong>you will discover them in production</strong>. The <strong>NIST AI Risk Management Framework</strong> emphasizes governance, measurement, and continuous risk management to support trustworthy AI systems (<a href="https://doi.org/10.6028/NIST.AI.100-1">NIST AI RMF 1.0</a>).</p>
+
+<p>In practice, that means explicit acceptance criteria, evaluations by segment, and monitoring for drift and regressions.</p>
+
+<h2>How to Avoid Desperation (Build Systems, Not Prompts)</h2>
+
+<p><strong>Strategy prevents desperation.</strong> If you build the system correctly, you never need to add "make no mistakes" to a prompt.</p>
+
+<p>Here is what that means in practice:</p>
+
+<h3>1) Define the Outcome Before You Prompt</h3>
+
+<p>Start with a measurable business decision or outcome. Not "AI will help users" but "AI will reduce support tickets by 30% with 90% accuracy."</p>
+
+<p><strong>If you cannot define success numerically, you cannot evaluate failure. And you will resort to desperate prompting when things go wrong.</strong></p>
+
+<h3>2) Make Data a First-Class Product</h3>
+
+<p>Clean data eliminates 80% of the need for clever prompting. Messy data forces teams to compensate with instructions.</p>
+
+<p>Data needs ownership, validation, and change control. <strong>If your data definitions are unclear, your prompts will become desperate attempts to clarify what the model should ignore.</strong></p>
+
+<h3>3) Design an Evaluation Harness</h3>
+
+<p>You need offline tests, validation datasets, and automated checks. <strong>"Prompting" is not evaluation.</strong></p>
+
+<p>If your first evaluation happens in production, you will be editing prompts reactively. If you test before shipping, you fix systems proactively.</p>
+
+<h3>4) Build for Reality, Not the Demo</h3>
+
+<p>Demos hide edge cases. Production is all edge cases.</p>
+
+<p>You need fallback paths, human review where needed, and alerts for failure states. <strong>If your only failure handling is "tell the model not to fail," you are not building a product.</strong></p>
+
+<h3>5) Treat AI as a System, Not a Feature</h3>
+
+<p>AI interacts with UX, data pipelines, APIs, and human workflows. If any part breaks, the experience breaks.</p>
+
+<p><strong>You cannot prompt your way out of a system failure.</strong> If the data pipeline is stale, the retrieval layer is broken, or the UI does not handle errors, no amount of "make no mistakes" will help.</p>
+
+<h2>The Test: Are You Building a System or Setting Up for Desperation?</h2>
+
+<p>If your AI project cannot answer these questions before shipping, <strong>you are setting yourself up for the desperation pattern</strong>:</p>
+
+<ul>
+<li>What is the measurable success outcome? (Not "help users" but "reduce X by Y% with Z% accuracy")</li>
+<li>Is an LLM the right approach, or do you need CV, traditional ML, or custom models? (Many teams default to LLMs when other approaches would work better)</li>
+<li>What data is required and who owns it? (If data ownership is unclear, prompts become desperate data cleanup instructions)</li>
+<li>How will you evaluate quality before launch? (If the first test is production, you will be editing prompts reactively)</li>
+<li>What happens when the model fails? (If the answer is "tell it not to fail," you do not have a system)</li>
+<li>How will you monitor drift and change over time? (Without monitoring, you discover failures through user complaints)</li>
+</ul>
+
+<p><strong>If you cannot answer those clearly, you are already on the path to Week 8: adding "make no mistakes" to prompts and hoping it works.</strong></p>
+
+<h2>FAQ</h2>
+
+<h3>Is this only about LLMs, or does it apply to other AI approaches?</h3>
+
+<p>The pattern applies to all AI systems—LLMs, computer vision, traditional ML, deep learning. The technology changes, but the system risks remain the same.</p>
+
+<p>That said, many teams assume "AI" means LLMs and prompt engineering. Real production systems often require fine-tuning, RAG, agent frameworks, or non-LLM approaches entirely (CV, statistical models, neural networks). If your use case cannot be solved with off-the-shelf LLMs, you need to build or hire for those capabilities.</p>
+
+<h3>Can I use AI to generate training data safely?</h3>
+
+<p>Yes, but only with verification. Synthetic data can accelerate coverage, but it also accelerates mistakes if you do not validate it with human review or ground-truth checks.</p>
+
+<h3>Do I need MLOps for small projects?</h3>
+
+<p>You need some version of it. Even a lightweight project needs data definitions, evaluation, and monitoring. The scale changes, not the fundamentals.</p>
+
+<h3>What is the fastest way to increase hit rate?</h3>
+
+<p>Stop chasing model quality first. Start with data quality and evaluation. Those two steps eliminate most failure modes early.</p>
+
+<hr>
+
+<h2>About the Author</h2>
+
+<p>I'm Jake McMahon, a product strategy consultant specializing in growth analytics and AI product development. I help B2B SaaS teams ship AI features that are measurable, maintainable, and aligned with real business outcomes.</p>
+
+<p>After working with 50+ teams, I can recognize the optimism → desperation pattern early and help teams avoid it. The projects that succeed do not have better models. They have better systems built upfront. My job is steering teams toward strategy before they end up adding "make no mistakes" to prompts and hoping it works.</p>
+
+<p><strong>Connect</strong>: <a href="https://www.linkedin.com/in/jake-mcmahon-product-ai/">LinkedIn</a> | jake.mrwgroup@gmail.com</p>
+
+<hr>
+
+<h2>Work With Me</h2>
+
+<p>If you are planning an AI feature and want to avoid the optimism → confusion → desperation pattern, I run <strong>12-16 week Growth Sprints</strong> where we build systems that never need "make no mistakes" prompts:</p>
+
+<ol>
+<li><strong>Define the outcome before prompting</strong> - tie the AI feature to a measurable business decision with numerical success criteria</li>
+<li><strong>Audit the data before shipping</strong> - assess quality, coverage, and risk so you are not compensating for bad data with desperate instructions</li>
+<li><strong>Build the evaluation system first</strong> - create offline tests, validation, and monitoring so the first test is not production</li>
+</ol>
+
+<p>We start with a free 2-week diagnostic to assess whether you are building a system or setting up for desperation. No obligation.</p>
+
+<p>If you move forward, I guarantee results - hit 60% of projected targets or I keep working for free.</p>
+
+<p><strong>Ready to build AI systems that do not require magical prompting?</strong> <a href="mailto:jake.mrwgroup@gmail.com">Let's talk</a>.</p>
+
+<hr>
+
+<h2>Sources</h2>
+
+<ul>
+<li><a href="https://research.google/pubs/machine-learning-the-high-interest-credit-card-of-technical-debt/">https://research.google/pubs/machine-learning-the-high-interest-credit-card-of-technical-debt/</a></li>
+<li><a href="https://research.google.com/pubs/archive/43146.pdf">https://research.google.com/pubs/archive/43146.pdf</a></li>
+<li><a href="https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems">https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems</a></li>
+<li><a href="https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf">https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf</a></li>
+<li><a href="https://research.google/pubs/everyone-wants-to-do-the-model-work-not-the-data-work-data-cascades-in-high-stakes-ai/">https://research.google/pubs/everyone-wants-to-do-the-model-work-not-the-data-work-data-cascades-in-high-stakes-ai/</a></li>
+<li><a href="https://storage.googleapis.com/gweb-research2023-media/pubtools/5936.pdf">https://storage.googleapis.com/gweb-research2023-media/pubtools/5936.pdf</a></li>
+<li><a href="https://www.nist.gov/itl/ai-risk-management-framework">https://www.nist.gov/itl/ai-risk-management-framework</a></li>
+<li><a href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a></li>
+</ul>
+
+</body>
+</html>
