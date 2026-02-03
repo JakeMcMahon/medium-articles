@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Activation Is Not Onboarding: The First Value Playbook</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Activation Is Not Onboarding: The First Value
+Playbook</h1>
+</header>
+<h1
+id="activation-is-not-onboarding-the-first-value-playbook-and-how-to-measure-it">Activation
+Is Not Onboarding: The First Value Playbook (And How to Measure It)</h1>
+<h2 id="tldr">TL;DR</h2>
+<p>Most teams optimize onboarding completion rates while activation
+stays stuck at 20–30%.</p>
+<p>The problem: <strong>completion is an input metric</strong> (what
+users do). <strong>Activation is an outcome metric</strong> (what users
+get).</p>
+<p>To fix activation: 1. Find your First Activation Event (FAE) — a
+measurable behavior that predicts retention 2. Reduce
+time-to-first-value by removing pre-value setup steps 3. Use different
+activation patterns for different product types (single-player vs
+multi-player vs marketplaces vs vertical SaaS)</p>
+<p>This guide includes: - Step-by-step method to find FAE from retention
+data - Activation pattern library with stealable examples for 4 product
+types - Experiment playbook ranked by expected impact - 10-minute
+worksheet to draft your v1 activation metric</p>
+<hr />
+<h2 id="the-pattern-i-see-repeatedly">The Pattern I See Repeatedly</h2>
+<p>Teams ship onboarding improvements.</p>
+<p>Completion rates go up.</p>
+<p>Activation stays flat.</p>
+<p>The confused question: “We fixed onboarding. Why didn’t activation
+improve?”</p>
+<p>The answer: <strong>You fixed the wrong thing.</strong></p>
+<p>You optimized what users <em>complete</em>, not what users
+<em>experience</em>.</p>
+<hr />
+<h2 id="why-your-activation-rate-is-lying-to-you">Why Your Activation
+Rate Is Lying to You</h2>
+<p>Here’s the pattern I see when auditing stuck activation metrics:</p>
+<p><strong>The team measures:</strong> - % who completed the onboarding
+checklist - % who connected an integration - % who filled out their
+profile - % who watched the tutorial</p>
+<p><strong>But retention follows:</strong> - % who generated their first
+meaningful output - % who experienced a solved problem - % who got value
+fast enough to come back</p>
+<p>Onboarding completion is an <strong>input metric</strong>. It
+measures effort.</p>
+<p>Activation is an <strong>outcome metric</strong>. It measures value
+delivery.</p>
+<p>If you optimize inputs, you get more completed steps and the same
+activation rate.</p>
+<hr />
+<h2 id="what-this-guide-gives-you">What This Guide Gives You</h2>
+<p>This is the tactical playbook I use when activation is stuck at
+20–35% and traditional onboarding improvements aren’t working.</p>
+<p><strong>You’ll learn:</strong></p>
+<ol type="1">
+<li>How to find your First Activation Event (FAE) from retention data in
+30 minutes</li>
+<li>Why different product types need different activation definitions
+(with 12+ stealable examples)</li>
+<li>The measurement method that separates “setup debt” from “value
+delivered”</li>
+<li>A 10-minute worksheet to draft your v1 activation metric</li>
+<li>The experiments that actually move activation (subtraction &gt;
+addition)</li>
+</ol>
+<p><strong>This works when:</strong> - Your team can’t agree on what
+“activated” means - Onboarding work keeps shipping without moving
+retention - You’re stuck in the 20–30% activation plateau</p>
+<p>Let’s fix it.</p>
+<h2 id="the-problem-onboarding-completion-is-a-vanity-metric">The
+Problem: Onboarding Completion Is a Vanity Metric</h2>
+<p>If your team measures onboarding completion, your team will optimize
+onboarding completion.</p>
+<p>That’s how you end up with:</p>
+<ul>
+<li>longer checklists</li>
+<li>more setup screens</li>
+<li>more “required” fields</li>
+<li>more tooltips nobody reads</li>
+</ul>
+<p>…and the same activation rate.</p>
+<p>Because onboarding completion is an input metric.</p>
+<p>Activation is an outcome metric.</p>
+<h3 id="the-activation-question-that-actually-matters">The activation
+question that actually matters</h3>
+<p>Instead of asking:</p>
+<blockquote>
+<p>“Did they finish onboarding?”</p>
+</blockquote>
+<p>Ask:</p>
+<blockquote>
+<p>“Did they experience value quickly enough to come back?”</p>
+</blockquote>
+<p>If you can’t answer that with a measurable event, you don’t have an
+activation strategy.</p>
+<p>You have onboarding chores.</p>
+<h2 id="the-vocabulary-that-fixes-your-team">The Vocabulary That Fixes
+Your Team</h2>
+<p>Use these terms consistently:</p>
+<ul>
+<li><strong>Value unit:</strong> the smallest unit that creates
+meaningful value (report generated, teammate invited, message
+sent).</li>
+<li><strong>First value:</strong> the first time a user experiences that
+value unit in their context.</li>
+<li><strong>TTFV (time-to-first-value):</strong> time from signup/first
+session to first value.</li>
+<li><strong>FAE (first activation event):</strong> the measurable
+event/threshold that best predicts retention.</li>
+<li><strong>Activation rate:</strong> % of new users who reach FAE in a
+defined window.</li>
+</ul>
+<p>Important nuance:</p>
+<ul>
+<li>“Aha moments” are useful for storytelling.</li>
+<li>FAEs are what you build roadmaps around.</li>
+</ul>
+<p>Activation is a prediction problem.</p>
+<p>Your job is to find the behavior that predicts retention—and engineer
+it.</p>
+<hr />
+<h2
+id="step-by-step-how-to-find-your-first-activation-event-fae">Step-by-Step:
+How to Find Your First Activation Event (FAE)</h2>
+<p>This is the part most teams skip.</p>
+<p>They pick an onboarding step (connect integration, create first
+project) and call it “activation.”</p>
+<p>That’s not measurement.</p>
+<p>That’s wishful thinking.</p>
+<p>Here’s a method you can run with almost any analytics stack.</p>
+<h3 id="step-0-decide-if-activation-is-user-level-or-account-level">Step
+0 — Decide if activation is user-level or account-level</h3>
+<p>If your product is bought by accounts (most B2B SaaS), user-level
+activation can lie to you.</p>
+<p>Decide the “buying unit” first:</p>
+<ul>
+<li>single-player products → user-level can work</li>
+<li>multi-player / enterprise / collaboration → account-level is often
+more predictive</li>
+</ul>
+<h3 id="step-1-choose-the-retention-outcome-you-care-about">Step 1 —
+Choose the retention outcome you care about</h3>
+<p>Pick one:</p>
+<ul>
+<li>retained at day 7</li>
+<li>retained at day 30</li>
+<li>active in week 4</li>
+</ul>
+<p>Don’t overcomplicate it. You’re trying to separate “stuck around”
+from “didn’t.”</p>
+<h3 id="step-2-make-a-short-list-of-candidate-behaviors-510">Step 2 —
+Make a short list of candidate behaviors (5–10)</h3>
+<p>Good candidates are behaviors that represent value delivered:</p>
+<ul>
+<li>producing an output (report generated, export created)</li>
+<li>completing a loop (invite + collaboration)</li>
+<li>reaching a threshold inside a window (“4 in 28” style)</li>
+</ul>
+<p>Bad candidates are behaviors that represent setup debt:</p>
+<ul>
+<li>clicked tooltip</li>
+<li>visited settings</li>
+<li>connected integration without output</li>
+</ul>
+<h3 id="step-3-run-a-simple-separation-test">Step 3 — Run a simple
+separation test</h3>
+<p>Split new users/accounts into two cohorts:</p>
+<ul>
+<li>retained</li>
+<li>not retained</li>
+</ul>
+<p>Then for each candidate behavior, ask:</p>
+<blockquote>
+<p>Do retained users do this <em>meaningfully more often</em> than
+churned users?</p>
+</blockquote>
+<p>You don’t need a fancy model to start.</p>
+<p>You need a clear separation signal.</p>
+<h3
+id="step-4-pick-the-simplest-candidate-that-still-separates-well">Step 4
+— Pick the simplest candidate that still separates well</h3>
+<p>That’s your v1 FAE.</p>
+<p>Make it explicit:</p>
+<ul>
+<li>event/threshold definition</li>
+<li>time window</li>
+<li>unit (user vs account)</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>“Account is activated when it sends 5 messages with 2 unique users
+in 7 days.”</li>
+<li>“User is activated when they generate a report and save 1 insight
+within 24 hours.”</li>
+<li>“User is activated when they run 1 automation successfully within 7
+days.”</li>
+</ul>
+<h3 id="step-5-validate-causality-with-experiments">Step 5 — Validate
+causality with experiments</h3>
+<p>If you can increase the % hitting FAE and retention also increases,
+you’re closer to a causal lever.</p>
+<p>If FAE moves but retention doesn’t, your FAE isn’t predictive.</p>
+<p>Version it (v1 → v2) and try again.</p>
+<hr />
+<h2 id="the-first-value-playbook-what-to-build-once-you-know-fae">The
+First Value Playbook (What to Build Once You Know FAE)</h2>
+<p>Once you know what behavior predicts retention, onboarding becomes a
+design problem:</p>
+<blockquote>
+<p>How do we get more users/accounts to reach that behavior faster?</p>
+</blockquote>
+<h3 id="define-the-value-unit-verb-object-outcome">1) Define the value
+unit (verb + object + outcome)</h3>
+<p>Use this sentence:</p>
+<blockquote>
+<p>“Our value unit is when a user <strong>[verb]</strong> a
+<strong>[object]</strong> and gets <strong>[outcome]</strong>.”</p>
+</blockquote>
+<p>Examples:</p>
+<ul>
+<li>“Generate a report that answers a business question.”</li>
+<li>“Invite a teammate and collaborate on one shared artifact.”</li>
+<li>“Run an automation that saves time weekly.”</li>
+</ul>
+<h3 id="pick-23-activation-paths-max">2) Pick 2–3 activation paths
+(max)</h3>
+<p>If everything is a path, nothing is a path.</p>
+<p>Pick:</p>
+<ul>
+<li>the highest-volume segment</li>
+<li>the highest-LTV segment</li>
+</ul>
+<p>And maybe one wildcard if it’s strategically important.</p>
+<h3 id="build-the-minimum-path-then-remove-steps">3) Build the minimum
+path (then remove steps)</h3>
+<p>Write down every step between:</p>
+<blockquote>
+<p>first session → first value</p>
+</blockquote>
+<p>Then delete, delay, or default anything that isn’t required.</p>
+<p>If users do work before they get paid with value, they leave.</p>
+<h3 id="add-stall-recovery">4) Add “stall recovery”</h3>
+<p>Your product should be self-correcting:</p>
+<ul>
+<li>next best action prompts</li>
+<li>templates and sample data</li>
+<li>clear progress feedback</li>
+</ul>
+<h3 id="measure-ttfv-distribution-not-just-averages">5) Measure TTFV
+distribution, not just averages</h3>
+<p>The average hides the tail.</p>
+<p>The tail kills your activation rate.</p>
+<p>Track:</p>
+<ul>
+<li>median TTFV</li>
+<li>75th percentile</li>
+<li>90th percentile</li>
+</ul>
+<p>If your median is good but your 90th percentile is terrible, your
+activation rate will look “mysteriously stuck.”</p>
+<hr />
+<h2
+id="activation-pattern-library-4-product-types-with-real-examples">Activation
+Pattern Library: 4 Product Types (With Real Examples)</h2>
+<p>Generic activation advice assumes all products are the same.</p>
+<p>They’re not.</p>
+<p>Here’s what works for each type, with stealable activation
+definitions you can adapt.</p>
+<hr />
+<h3
+id="pattern-1-single-player-products-the-proof-within-24-hours-rule">Pattern
+1: Single-Player Products (The “Proof Within 24 Hours” Rule)</h3>
+<p><strong>Examples:</strong> Notion, Superhuman, Zapier (before
+multi-user features), most AI assistants, personal analytics
+dashboards</p>
+<p><strong>Why generic advice fails here:</strong></p>
+<p>Most single-player activation advice says “make onboarding shorter.”
+But length isn’t the problem—it’s the gap between effort and payoff.</p>
+<p>If users must connect 3 integrations, configure 5 settings, and
+complete a profile <em>before</em> they see an output, you’ve asked them
+to do work before they got paid.</p>
+<p>That’s the activation killer.</p>
+<p><strong>The working pattern:</strong></p>
+<p>Deliver personal value within the first session. If your product
+takes weeks to show “real” results, design a proxy first value that
+proves it works immediately.</p>
+<p><strong>Real-world activation metrics that work:</strong></p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 48%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Product Type</th>
+<th>Activation Definition</th>
+<th>Window</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Analytics dashboard</td>
+<td>First report generated with real data + 1 saved insight</td>
+<td>24 hours</td>
+</tr>
+<tr class="even">
+<td>Automation tool</td>
+<td>First workflow run successfully (test or live)</td>
+<td>24 hours</td>
+</tr>
+<tr class="odd">
+<td>AI writing assistant</td>
+<td>First document created + exported/saved</td>
+<td>48 hours</td>
+</tr>
+<tr class="even">
+<td>Research tool</td>
+<td>First artifact created + first share/export action</td>
+<td>7 days</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Common pattern:</strong></p>
+<p>When teams measure “connected data source + invited teammate,”
+they’re measuring setup completion, not value delivery. Users connect
+integrations but never generate their first report.</p>
+<p>Switching to “generated first report + saved 1 insight” measures
+whether users experienced value, not just whether they completed setup
+steps.</p>
+<p><strong>The proxy value trick:</strong></p>
+<p>If your product needs weeks to train a model or collect data:</p>
+<ol type="1">
+<li>Show a preview with sample data within 24 hours</li>
+<li>Let users run a “test mode” that proves the engine works</li>
+<li>Generate a baseline output immediately, then show improvement over
+time</li>
+</ol>
+<p>Example: An ML-powered forecasting tool could show “here’s what your
+forecast would look like with 30 days of data” using anonymized sample
+data in the first session.</p>
+<hr />
+<h3 id="pattern-2-collaboration-products-the-sequencing-problem">Pattern
+2: Collaboration Products (The Sequencing Problem)</h3>
+<p><strong>Examples:</strong> Slack, Asana, Miro, Figma, Linear, most
+project management tools</p>
+<p><strong>Why generic advice fails here:</strong></p>
+<p>The standard advice is “reduce friction on invites.” But that’s not
+the problem.</p>
+<p>The problem is <strong>timing</strong>.</p>
+<p>Most collaboration products prompt invites on Day 1, when the user
+has: - No confidence the product works - No clear reason to bring others
+in - No understanding of who needs access</p>
+<p>Then they never prompt again after the user experiences value.</p>
+<p><strong>The working pattern:</strong></p>
+<p>Two-phase activation: 1. <strong>Phase 1 (Days 1-3):</strong>
+Personal value first — let the user build confidence solo 2.
+<strong>Phase 2 (Days 3-7):</strong> Collaboration prompt — now they
+have a reason to invite</p>
+<p><strong>Real-world activation metrics that work:</strong></p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 32%" />
+<col style="width: 31%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Product Type</th>
+<th>Phase 1 (Personal Value)</th>
+<th>Phase 2 (Collaboration)</th>
+<th>Total Window</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Project management</td>
+<td>First task created + marked complete</td>
+<td>1+ teammate invited + first shared action</td>
+<td>7 days</td>
+</tr>
+<tr class="even">
+<td>Design collaboration</td>
+<td>First artifact created</td>
+<td>Shared + commented on by 2+ people</td>
+<td>7 days</td>
+</tr>
+<tr class="odd">
+<td>Team messaging</td>
+<td>First message sent in personal workspace</td>
+<td>2+ team members active + 10+ messages exchanged</td>
+<td>7 days</td>
+</tr>
+<tr class="even">
+<td>Shared analytics</td>
+<td>First dashboard created</td>
+<td>Viewed by 2+ unique users</td>
+<td>14 days</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Common pattern:</strong></p>
+<p>Teams that measure “invited 1 teammate within 48 hours” see low
+activation because they’re prompting collaboration before users have
+confidence.</p>
+<p>Sequencing it as “created first project solo, then invited teammate,
+then completed shared action” (measured at account level) allows
+personal value first, then collaboration when they have a reason.</p>
+<p><strong>Critical mistake to avoid:</strong></p>
+<p>Don’t measure activation at the user level for collaboration
+products.</p>
+<p>A single active user in a 10-person account isn’t activation—it’s a
+churn risk.</p>
+<p>Measure at the <strong>account level</strong>: Did the collaboration
+loop start?</p>
+<hr />
+<h3 id="pattern-3-marketplaces-the-liquidity-proof-problem">Pattern 3:
+Marketplaces (The Liquidity Proof Problem)</h3>
+<p><strong>Examples:</strong> Upwork, Airbnb, AngelList, Faire, most B2B
+vendor marketplaces</p>
+<p><strong>Why generic advice fails here:</strong></p>
+<p>Marketplaces get told: “Make signup easier. Improve the profile flow.
+Add better filters.”</p>
+<p>But a perfect onboarding flow won’t save a marketplace that can’t
+prove liquidity.</p>
+<p>Users need to experience: “This marketplace has what I need, and
+matches actually happen here.”</p>
+<p><strong>The working pattern:</strong></p>
+<p>Activation is proof the marketplace works. For two-sided platforms,
+you need different activation definitions for each side.</p>
+<p><strong>Real-world activation metrics by side:</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 45%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Marketplace Side</th>
+<th>Activation Definition</th>
+<th>Window</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Supply (sellers)</strong></td>
+<td>First listing posted + first inquiry received from a buyer</td>
+<td>14 days</td>
+</tr>
+<tr class="even">
+<td><strong>Demand (buyers)</strong></td>
+<td>First search saved or category followed + first message sent to
+seller</td>
+<td>7 days</td>
+</tr>
+<tr class="odd">
+<td><strong>Two-sided</strong></td>
+<td>First matched interaction (inquiry accepted OR meeting booked) +
+transaction initiated</td>
+<td>30 days</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Alternative marketplace activation definitions:</strong></p>
+<p>For <strong>job boards:</strong> - Employers: First job posted +
+first qualified applicant within 14 days - Job seekers: First
+application sent + first response received within 7 days</p>
+<p>For <strong>B2B vendor directories:</strong> - Vendors: First profile
+completed + first inbound inquiry within 21 days - Buyers: First vendor
+contacted + first demo booked within 14 days</p>
+<p><strong>Common pattern:</strong></p>
+<p>Marketplaces that measure “profile completed + portfolio added” are
+measuring setup, not proof the marketplace works.</p>
+<p>Measuring “first proposal sent + first response received” for
+freelancers and “first job posted + first qualified proposal” for
+clients proves the marketplace has liquidity—which is what actually
+predicts whether users return.</p>
+<p><strong>The supply/demand balance insight:</strong></p>
+<p>If supply activation is high but demand activation is low, you have a
+liquidity problem on the demand side—not an onboarding problem.</p>
+<p>Fix the marketplace mechanics (search, matching, discovery), not the
+UI.</p>
+<hr />
+<h3 id="pattern-4-vertical-saas-the-compliance-excuse">Pattern 4:
+Vertical SaaS (The Compliance Excuse)</h3>
+<p><strong>Examples:</strong> Healthcare SaaS, fintech platforms, legal
+tech, HR systems with SOC 2 requirements</p>
+<p><strong>Why generic advice fails here:</strong></p>
+<p>Vertical SaaS teams say: “Our product takes 4–6 weeks to go live
+because of compliance/integrations. We can’t optimize for fast
+activation.”</p>
+<p>That’s an excuse, not a constraint.</p>
+<p><strong>The working pattern:</strong></p>
+<p>Two-phase activation: 1. <strong>Proof phase (24–48 hours):</strong>
+Show them what the output looks like with mock/sample data 2.
+<strong>Integration phase (14–30 days):</strong> Complete real setup and
+process live data</p>
+<p>This keeps users engaged during the compliance/approval process.</p>
+<p><strong>Real-world activation metrics that work:</strong></p>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 24%" />
+<col style="width: 33%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Product Type</th>
+<th>Phase 1 (Proof)</th>
+<th>Phase 2 (Integration)</th>
+<th>Total Window</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Healthcare analytics</td>
+<td>Preview report with anonymized sample data</td>
+<td>First report with real patient data (HIPAA-compliant)</td>
+<td>24 hrs → 21 days</td>
+</tr>
+<tr class="even">
+<td>Fintech API</td>
+<td>Test transaction in sandbox mode</td>
+<td>First live transaction processed</td>
+<td>48 hrs → 30 days</td>
+</tr>
+<tr class="odd">
+<td>Compliance workflow</td>
+<td>Lite workflow completed in demo mode</td>
+<td>First real workflow completed with audit trail</td>
+<td>7 days → 21 days</td>
+</tr>
+<tr class="even">
+<td>HR system</td>
+<td>First mock payroll run with test data</td>
+<td>First real payroll run</td>
+<td>48 hrs → 30 days</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Common pattern:</strong></p>
+<p>Vertical SaaS teams that only measure “completed compliance checklist
++ connected integration” often see users churn during the 3–4 week wait
+for approvals.</p>
+<p>Using two-phase activation—“generated first report with sample data”
+(24 hours) and then “processed first report with real data” (21
+days)—keeps users engaged during the compliance/integration process by
+proving the product works immediately.</p>
+<p><strong>The proxy value playbook:</strong></p>
+<p>If your product has unavoidable delays (compliance reviews, IT
+approvals, data migrations):</p>
+<ol type="1">
+<li><strong>Week 1:</strong> Show output with sample data or run in
+sandbox mode</li>
+<li><strong>Week 2–3:</strong> User completes compliance/approval steps
+while staying engaged</li>
+<li><strong>Week 3–4:</strong> Real integration completes, transition
+from proxy to live data</li>
+</ol>
+<p>This transforms “4 weeks of waiting” into “proof in 24 hours +
+gradual unlocking.”</p>
+<hr />
+<h2 id="the-activation-experiment-playbook-what-actually-works">The
+Activation Experiment Playbook (What Actually Works)</h2>
+<p>When activation is stuck, teams usually add more: more tooltips, more
+videos, more setup steps.</p>
+<p>But the highest-leverage experiments are usually subtractive.</p>
+<p>Here’s the priority order I use:</p>
+<hr />
+<h3
+id="tier-1-experiments-that-move-activation-515-percentage-points">Tier
+1: Experiments that move activation 5–15 percentage points</h3>
+<p><strong>1. Add templates or sample data (kills the empty state
+problem)</strong></p>
+<p>Before: User signs up → sees blank dashboard → has to create
+everything from scratch → leaves</p>
+<p>After: User signs up → sees dashboard pre-populated with sample data
+→ explores immediately → creates their first real output</p>
+<p><strong>Where this works:</strong> - Analytics tools (show example
+reports) - Project management (template projects) - Design tools
+(starter templates) - Automation tools (pre-built workflows)</p>
+<p><strong>Expected impact:</strong> +8–15pp activation lift</p>
+<hr />
+<p><strong>2. Remove pre-value setup steps (reduce work before
+payoff)</strong></p>
+<p>Before: Connect integration → configure settings → invite teammates →
+see output (5 steps, 20 minutes)</p>
+<p>After: See output with sample data → connect integration if needed →
+configure settings later (1 step, 2 minutes)</p>
+<p><strong>Where this works:</strong> - Single-player products where
+integrations aren’t required for proof - Products with long setup
+sequences before first output</p>
+<p><strong>Expected impact:</strong> +5–12pp activation lift</p>
+<hr />
+<p><strong>3. Default everything possible (kill decision
+fatigue)</strong></p>
+<p>Before: “Choose your workspace type” → 8 options → paralysis</p>
+<p>After: “We created a workspace for you” → 1 default → user can change
+later</p>
+<p><strong>Where this works:</strong> - Products with lots of upfront
+configuration - Settings that can be inferred or defaulted</p>
+<p><strong>Expected impact:</strong> +3–8pp activation lift</p>
+<hr />
+<h3
+id="tier-2-experiments-that-move-activation-38-percentage-points">Tier
+2: Experiments that move activation 3–8 percentage points</h3>
+<p><strong>4. Add post-activation invite prompts (multi-player products
+only)</strong></p>
+<p>Before: “Invite teammates” prompt on Day 1 (user ignores, never sees
+again)</p>
+<p>After: Silent on Day 1 → prompt 24 hours after first value → “You
+just created X. Want to share with your team?”</p>
+<p><strong>Where this works:</strong> - Collaboration products -
+Products where viral loops drive growth</p>
+<p><strong>Expected impact:</strong> +5–8pp on account-level
+activation</p>
+<hr />
+<p><strong>5. Create a “proxy first value” path (long time-to-value
+products)</strong></p>
+<p>Before: “Setup will take 2–4 weeks” → user waits → user churns</p>
+<p>After: “See a preview with sample data” (24 hours) → real setup
+continues in background → full value unlocks later</p>
+<p><strong>Where this works:</strong> - Vertical SaaS with compliance
+delays - Products that require data collection or training periods -
+Integration-heavy tools</p>
+<p><strong>Expected impact:</strong> +6–10pp activation lift (measured
+at Phase 1)</p>
+<hr />
+<p><strong>6. Guided vs unguided paths (segment by
+complexity)</strong></p>
+<p>Before: One onboarding path for everyone</p>
+<p>After: “I want to explore” (unguided, power users) vs “Show me how it
+works” (guided, first-time users)</p>
+<p><strong>Where this works:</strong> - Products with diverse user
+sophistication - Products where power users find guidance annoying</p>
+<p><strong>Expected impact:</strong> +3–6pp activation lift</p>
+<hr />
+<h3
+id="tier-3-experiments-that-move-activation-14-percentage-points">Tier
+3: Experiments that move activation 1–4 percentage points</h3>
+<p><strong>7. Progressive disclosure (hide advanced features
+initially)</strong></p>
+<p>Before: Show all 40 features on day 1</p>
+<p>After: Show 5 core features → unlock more as users progress</p>
+<p><strong>Where this works:</strong> - Feature-rich products - Products
+with high perceived complexity</p>
+<p><strong>Expected impact:</strong> +2–4pp activation lift</p>
+<hr />
+<p><strong>8. Stall recovery prompts (rescue stuck users)</strong></p>
+<p>Before: User hits empty state → leaves</p>
+<p>After: User hits empty state → “Try one of these starter templates” →
+recovers</p>
+<p><strong>Where this works:</strong> - Products with workflow stalls -
+Products with unclear next actions</p>
+<p><strong>Expected impact:</strong> +2–5pp activation lift</p>
+<hr />
+<h3 id="the-subtraction-rule">The Subtraction Rule</h3>
+<p>Before running any experiment, ask:</p>
+<p><strong>“Can I remove this step entirely?”</strong></p>
+<p>If yes, remove it.</p>
+<p>If no, ask: <strong>“Can I delay this until after first
+value?”</strong></p>
+<p>If yes, delay it.</p>
+<p>Only after exhausting subtraction should you add new elements.</p>
+<hr />
+<h3 id="experiment-prioritization-framework">Experiment Prioritization
+Framework</h3>
+<p>Use this to pick your first experiment:</p>
+<ol type="1">
+<li><strong>Highest impact:</strong> Templates/sample data (if you have
+empty states)</li>
+<li><strong>Easiest to test:</strong> Remove pre-value setup steps</li>
+<li><strong>Best for collaboration products:</strong> Post-activation
+invite sequencing</li>
+<li><strong>Best for long TTFV:</strong> Proxy first value</li>
+<li><strong>Best for feature-rich products:</strong> Progressive
+disclosure</li>
+</ol>
+<p>Start with #1 unless you have a clear reason to prioritize
+differently.</p>
+<hr />
+<h2 id="worksheet-10-minutes">Worksheet (10 Minutes)</h2>
+<h3 id="define-value-unit">1) Define value unit</h3>
+<p>“Our value unit is when a <strong>[persona]</strong> can
+<strong>[verb] [object]</strong> and get
+<strong>[outcome]</strong>.”</p>
+<h3 id="define-first-value-for-your-top-2-segments">2) Define first
+value for your top 2 segments</h3>
+<blockquote>
+<p>For <strong>[segment]</strong>, first value is when they
+<strong>[value unit]</strong> within <strong>[time window]</strong>.</p>
+</blockquote>
+<h3 id="draft-5-candidate-activation-events">3) Draft 5 candidate
+activation events</h3>
+<p>Write 5 lines that start with:</p>
+<blockquote>
+<p>“A new user/account is activated when they…”</p>
+</blockquote>
+<p>Examples:</p>
+<ul>
+<li>“…generate a report and save one insight”</li>
+<li>“…run their first automation successfully”</li>
+<li>“…invite 1 teammate and complete 1 collaborative action”</li>
+</ul>
+<h3 id="pick-your-activation-window">4) Pick your activation window</h3>
+<p>Choose: 24 hours, 7 days, or 14 days.</p>
+<h3 id="pick-the-retention-outcome-youll-compare-against">5) Pick the
+retention outcome you’ll compare against</h3>
+<ul>
+<li>retained at day 7 vs not retained</li>
+<li>retained at day 30 vs not retained</li>
+</ul>
+<p>Close with:</p>
+<p>If you can’t measure it, you can’t improve it. But if you measure the
+wrong thing, you’ll improve the wrong thing faster.</p>
+<hr />
+<h2 id="common-activation-mistakes-and-how-to-avoid-them">Common
+Activation Mistakes (And How to Avoid Them)</h2>
+<h3
+id="mistake-1-our-activation-rate-is-60-but-retention-is-still-bad">Mistake
+1: “Our activation rate is 60%, but retention is still bad”</h3>
+<p><strong>The problem:</strong> You’re measuring the wrong thing.</p>
+<p>If 60% of users “activate” but retention is flat, your activation
+event isn’t predictive of retention.</p>
+<p><strong>The fix:</strong> Re-run the separation analysis. Compare
+users who hit your “activation” event vs those who didn’t. Do they have
+meaningfully different retention rates?</p>
+<p>If the gap is small (&lt;10 percentage points), your activation
+metric is measuring setup, not value.</p>
+<p>Version it (FAE v1 → v2) until you find the behavior that actually
+predicts retention.</p>
+<hr />
+<h3
+id="mistake-2-we-cant-measure-activation-because-our-product-takes-6-weeks-to-show-value">Mistake
+2: “We can’t measure activation because our product takes 6 weeks to
+show value”</h3>
+<p><strong>The problem:</strong> You’re confusing “full value” with
+“first proof.”</p>
+<p>Users don’t need to experience the complete outcome in 24 hours. They
+need proof the product works for them.</p>
+<p><strong>The fix:</strong> Design a two-phase activation:</p>
+<ol type="1">
+<li><strong>Proof phase:</strong> Show output with sample data, run in
+test mode, or generate a preview within 24–48 hours</li>
+<li><strong>Full value phase:</strong> Track when they experience the
+real outcome (14–30 days)</li>
+</ol>
+<p>Both are valid metrics. The first keeps them engaged. The second
+predicts long-term retention.</p>
+<hr />
+<h3
+id="mistake-3-onboarding-completion-is-75-but-activation-is-22">Mistake
+3: “Onboarding completion is 75% but activation is 22%”</h3>
+<p><strong>The problem:</strong> Completion and activation measure
+different things.</p>
+<p>Completion = did they finish the steps you asked them to do?
+Activation = did they experience value?</p>
+<p><strong>The fix:</strong> Map the path from completion to
+activation:</p>
+<ul>
+<li>Of the 75% who complete onboarding, how many reach first value
+within 7 days?</li>
+<li>Where do the other 53% get stuck?</li>
+</ul>
+<p>Usually, you’ll find they complete setup but hit an empty state,
+unclear next action, or lack of data.</p>
+<p>Add templates, sample data, or recovery prompts to bridge the
+gap.</p>
+<hr />
+<h3
+id="mistake-4-we-added-tooltips-and-videos-but-activation-didnt-move">Mistake
+4: “We added tooltips and videos but activation didn’t move”</h3>
+<p><strong>The problem:</strong> You’re solving an education problem
+when the real issue is value delivery.</p>
+<p>Users don’t churn because they don’t understand your product. They
+churn because they didn’t get value fast enough.</p>
+<p><strong>The fix:</strong> Map time-to-first-value (TTFV) by
+cohort:</p>
+<ul>
+<li>What’s the median TTFV?</li>
+<li>What’s the 90th percentile?</li>
+</ul>
+<p>If your median is good but your 90th percentile is terrible (e.g.,
+median = 2 days, p90 = 14 days), you don’t have an education problem.
+You have a “tail of stuck users” problem.</p>
+<p>Fix stalls, empty states, and unclear next actions—not the UI
+polish.</p>
+<hr />
+<h3
+id="mistake-5-our-icp-is-too-broad-to-pick-one-activation-event">Mistake
+5: “Our ICP is too broad to pick one activation event”</h3>
+<p><strong>The problem:</strong> If everything is a segment, nothing is
+a segment.</p>
+<p>You can’t build 10 onboarding paths and expect all of them to work
+well.</p>
+<p><strong>The fix:</strong> Pick your top 2–3 segments based on:</p>
+<ol type="1">
+<li>Highest revenue potential</li>
+<li>Highest retention rates</li>
+<li>Strategic importance</li>
+</ol>
+<p>Define activation for each. Ignore the long tail for now.</p>
+<p>Once you’ve proven you can activate the core segments, expand
+carefully.</p>
+<hr />
+<h3
+id="mistake-6-were-a-collaboration-product.-should-we-measure-activation-at-the-user-level-or-account-level">Mistake
+6: “We’re a collaboration product. Should we measure activation at the
+user level or account level?”</h3>
+<p><strong>The problem:</strong> User-level activation lies to you in
+multi-player products.</p>
+<p>A single active user in a 20-person account isn’t activation—it’s a
+churn risk.</p>
+<p><strong>The fix:</strong> Measure at the account level for
+collaboration products:</p>
+<ul>
+<li>Did the collaboration loop start?</li>
+<li>Are 2+ users active within the first 7 days?</li>
+<li>Did they complete a shared action (comment, assignment, shared
+view)?</li>
+</ul>
+<p>For single-player products, user-level activation works fine.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Q: What’s the difference between onboarding and
+activation?</strong></p>
+<p>A: Onboarding is what users <em>do</em> (steps, clicks, setup tasks).
+Activation is what users <em>get</em> (value delivered, outcome
+achieved). Onboarding completion is an input metric. Activation is an
+outcome metric that should predict retention.</p>
+<p><strong>Q: How do I find my First Activation Event
+(FAE)?</strong></p>
+<p>A: Use retention separation analysis: 1. Pick a retention outcome
+(Day 7 or Day 30 retained) 2. List 5–10 candidate behaviors that
+represent value 3. Split users into retained vs churned 4. Find which
+behavior creates the strongest separation 5. That’s your v1 FAE —
+version it over time as your product evolves</p>
+<p><strong>Q: What activation window should I use — 24 hours, 7 days, or
+14 days?</strong></p>
+<p>A: Use the shortest window that fits your product: - Single-player
+products (analytics, automation): 24–48 hours - Multi-player B2B
+(collaboration tools): 7–14 days - Marketplaces: 7–30 days depending on
+liquidity - Vertical SaaS with compliance: 24 hours (proxy) + 14–30 days
+(real integration)</p>
+<p>The window should create urgency without forcing fake activation.</p>
+<p><strong>Q: Our onboarding completion rate is high but activation is
+flat. Why?</strong></p>
+<p>A: Because completion and activation measure different things. Users
+can complete every onboarding step and still never experience value. Map
+the gap: where do users get stuck between completion and first value?
+Usually it’s empty states, unclear next actions, or setup without
+output.</p>
+<p><strong>Q: Should we measure activation at the user level or account
+level?</strong></p>
+<p>A: Depends on your product: - <strong>Single-player
+products:</strong> User-level works - <strong>Multi-player/collaboration
+products:</strong> Account-level is more predictive because a single
+active user in a team account isn’t activation—it’s a churn risk.
+Measure whether the collaboration loop started.</p>
+<p><strong>Q: What if our product takes 6 weeks to deliver real
+value?</strong></p>
+<p>A: Design two-phase activation: 1. <strong>Proof phase (24–48
+hours):</strong> Show preview with sample data, run test mode, generate
+baseline output 2. <strong>Full value phase (14–30 days):</strong> Track
+when real integration/outcome completes</p>
+<p>The first phase proves it works and keeps users engaged. The second
+predicts long-term retention.</p>
+<p><strong>Q: We have 10+ personas. Do we need 10 activation
+events?</strong></p>
+<p>A: No. Pick your top 2–3 segments based on revenue potential and
+retention rates. Define activation for those. If everything is a
+segment, nothing is a segment. Prove you can activate core segments
+first, then expand.</p>
+<p><strong>Q: What’s the most common reason activation improvements
+fail?</strong></p>
+<p>A: Teams optimize onboarding steps (tooltips, UI polish, tutorial
+videos) instead of value delivery (time-to-first-value, empty state
+elimination, proxy value for long TTFV products). You can’t polish your
+way to better activation if users aren’t experiencing value fast
+enough.</p>
+<p><strong>Q: How do I know if my FAE is “right”?</strong></p>
+<p>A: Run experiments. If you increase the % of users hitting FAE and
+retention also improves, your FAE is predictive. If FAE moves but
+retention doesn’t, your FAE is measuring setup, not value. Version it
+(v1 → v2) and try again.</p>
+<p><strong>Q: What’s the fastest way to improve activation?</strong></p>
+<p>A: Start with subtraction, not addition: 1. Remove pre-value setup
+steps 2. Add templates/sample data to eliminate empty states 3. Default
+everything possible to reduce decision fatigue</p>
+<p>Most teams try to add features, guidance, or polish when the real
+lever is removing friction before first value.</p>
+<hr />
+<h2 id="about-the-author">About the Author</h2>
+<p>I’m Jake McMahon. I help B2B SaaS teams improve activation and
+retention by turning “onboarding” into a measurable system: defining the
+first value event that predicts retention, instrumenting it cleanly, and
+redesigning the product experience so more users reach it faster.</p>
+<p>If your activation rate is stuck, your onboarding completion rate is
+lying, or your team can’t agree on what “activated” means, I can help
+you get to a clean v1 definition and a roadmap that actually moves the
+metric.</p>
+<p><strong>Connect:</strong> <a
+href="https://www.linkedin.com/in/jake-mcmahon-product-ai/">LinkedIn</a>
+| jake.mrwgroup@gmail.com</p>
+<h2 id="work-with-me">Work With Me</h2>
+<p>If you want to fix activation with a measurable plan (not more
+tours), I run focused <strong>12–16 week growth/activation
+sprints</strong>. Email me your current activation metric + onboarding
+flow and I’ll tell you where first value is getting delayed.</p>
+</body>
+</html>
